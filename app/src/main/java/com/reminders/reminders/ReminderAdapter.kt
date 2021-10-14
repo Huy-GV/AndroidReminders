@@ -1,0 +1,54 @@
+package com.reminders.reminders
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.inflate
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.reminders.R
+import com.reminders.data.model.Reminder
+import com.reminders.data.model.Topic
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectIndexed
+import org.w3c.dom.Text
+
+class ReminderAdapter() : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
+    class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val content = itemView.findViewById<TextView>(R.id.reminder_content)
+        val deadline = itemView.findViewById<TextView>(R.id.reminder_deadline)
+        val priority = itemView.findViewById<TextView>(R.id.reminder_priority)
+    }
+
+    val reminders = mutableListOf<Reminder>()
+
+    fun updateData(newData: List<Reminder>) {
+        reminders.clear()
+        reminders.addAll(newData)
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
+        val inflatedLayout = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.reminder_view_holder, parent, false)
+
+        return TopicViewHolder(inflatedLayout)
+    }
+
+    override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
+        val reminder = reminders[position]
+        holder.apply {
+            content.text = reminder.content
+            deadline.text = reminder.deadline.toString()
+            priority.text = reminder.priority.toString()
+
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return reminders.size
+    }
+
+
+}

@@ -25,6 +25,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ReadTopicFragment : Fragment() {
+
+
     private val appViewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
@@ -32,6 +34,8 @@ class ReadTopicFragment : Fragment() {
             database.topicDao()
         )
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,7 @@ class ReadTopicFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
-        val topicAdapter = TopicAdapter()
+        val topicAdapter = TopicAdapter(this.findNavController())
 
         appViewModel
             .getTopics()

@@ -23,10 +23,8 @@ class AppViewModel(
         }
     }
 
-    fun getReminders(topicId: Int) {
-        viewModelScope.launch {
-            reminderDao.getAll(topicId)
-        }
+    fun getReminders(topicId: Int) : LiveData<List<Reminder>> {
+        return reminderDao.getAll(topicId).asLiveData()
     }
 
     fun createReminder(content: String, deadline: Date, priority: Int, topicId: Int) {

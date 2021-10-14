@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import com.reminders.data.dao.*
 import com.reminders.data.model.*
 
-@Database(entities = [Reminder::class, Topic::class], version = 1, exportSchema = false)
+@Database(entities = [Reminder::class, Topic::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

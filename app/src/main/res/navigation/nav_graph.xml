@@ -12,9 +12,33 @@
         <action
             android:id="@+id/action_readTopicFragment_to_createTopicFragment"
             app:destination="@id/createTopicFragment" />
+        <action
+            android:id="@+id/action_readTopicFragment_to_readReminderFragment"
+            app:destination="@id/readReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTopicFragment"
         android:name="com.reminders.topics.CreateTopicFragment"
         android:label="CreateTopicFragment" />
+    <fragment
+        android:id="@+id/readReminderFragment"
+        android:name="com.reminders.reminders.ReadReminderFragment"
+        android:label="fragment_read_reminder"
+        tools:layout="@layout/fragment_read_reminder" >
+        <argument
+            android:name="topic_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_readReminderFragment_to_createReminderFragment"
+            app:destination="@id/createReminderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createReminderFragment"
+        android:name="com.reminders.reminders.CreateReminderFragment"
+        android:label="fragment_create_reminder"
+        tools:layout="@layout/fragment_create_reminder" >
+        <argument
+            android:name="topic_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

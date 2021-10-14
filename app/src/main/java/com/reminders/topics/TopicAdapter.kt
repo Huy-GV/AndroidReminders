@@ -5,16 +5,23 @@ import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.reminders.R
 import com.reminders.data.model.Topic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectIndexed
 
-class TopicAdapter() : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
-    class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var name = itemView.findViewById<TextView>(R.id.topic_name)
-        var creationDate = itemView.findViewById<TextView>(R.id.topic_creation_date)
+class TopicAdapter(
+    private val navController: NavController
+    ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
+
+    class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var name = view.findViewById<TextView>(R.id.topic_name)
+        var creationDate = view.findViewById<TextView>(R.id.topic_creation_date)
+        var card = view.findViewById<MaterialCardView>(R.id.topic_card)
     }
 
     val topics = mutableListOf<Topic>()
@@ -38,7 +45,13 @@ class TopicAdapter() : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
         holder.apply {
             name.text = topic.name
             creationDate.text = topic.creationDate.toString()
+            card.setOnClickListener {
+                val action = ReadTopicFragmentDirections
+                    .actionReadTopicFragmentToReadReminderFragment(topic.id)
+                    navController.navigate(action)
+            }
         }
+
     }
 
     override fun getItemCount(): Int {
