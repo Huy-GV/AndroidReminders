@@ -20,7 +20,7 @@ data class Reminder(
     @ColumnInfo(name = "content")
     val content: String,
     @ColumnInfo(name = "deadline")
-    val deadline: Date,
+    val deadline: Date?,
     @ColumnInfo(name = "priority")
     val priority: Int,
     @ColumnInfo(name = "topicId")

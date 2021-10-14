@@ -4,10 +4,15 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.reminders.AppViewModel
 import com.reminders.R
+import com.reminders.application.MyApplication
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,39 +25,49 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ReadTopicFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val appViewModel: AppViewModel by activityViewModels {
+
+        AppViewModel.Factory(
+            (activity?.application as MyApplication).database.reminderDao(),
+            (activity?.application as MyApplication).database.topicDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
-        view.findViewById<RecyclerView>(R.id.topic_recycler).apply{
-            adapter = TopicAdapter()
+
+        val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
+        val topicAdapter = TopicAdapter()
+
+        appViewModel.getTopics().observe(this.viewLifecycleOwner) {
+                topics -> topicAdapter.updateData(topics)
+        }
+
+        recycler.apply {
+            adapter = topicAdapter
             layoutManager = LinearLayoutManager(this@ReadTopicFragment.context)
         }
+
+        view.findViewById<Button>(R.id.create_topic_button).setOnClickListener {
+            val action = ReadTopicFragmentDirections.actionReadTopicFragmentToCreateTopicFragment()
+            this.findNavController().navigate(action)
+        }
+
         return view
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ReadTopicFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            ReadTopicFragment()
     }
 }

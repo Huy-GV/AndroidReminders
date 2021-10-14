@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/readTopicFragment">
+
+    <fragment
+        android:id="@+id/readTopicFragment"
+        android:name="com.reminders.topics.ReadTopicFragment"
+        android:label="fragment_read_topic"
+        tools:layout="@layout/fragment_read_topic" >
+        <action
+            android:id="@+id/action_readTopicFragment_to_createTopicFragment"
+            app:destination="@id/createTopicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTopicFragment"
+        android:name="com.reminders.topics.CreateTopicFragment"
+        android:label="CreateTopicFragment" />
+</navigation>
