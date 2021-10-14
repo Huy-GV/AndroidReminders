@@ -27,9 +27,15 @@
             android:id="@+id/topic_input_field"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="BACK"-->
+<!--        android:id="@+id/back_button"/>-->
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BACK"
-        android:id="@+id/back_button"/>
+        android:text="Create topic"
+        android:id="@+id/create_topic_button"/>
 </LinearLayout>

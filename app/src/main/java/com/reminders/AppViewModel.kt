@@ -48,6 +48,7 @@ class AppViewModel(
         ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
             return AppViewModel(topicDao, reminderDao) as T
         }
     }

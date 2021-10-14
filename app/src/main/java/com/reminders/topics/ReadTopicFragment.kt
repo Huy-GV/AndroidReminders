@@ -26,10 +26,10 @@ private const val ARG_PARAM2 = "param2"
  */
 class ReadTopicFragment : Fragment() {
     private val appViewModel: AppViewModel by activityViewModels {
-
+        val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
-            (activity?.application as MyApplication).database.reminderDao(),
-            (activity?.application as MyApplication).database.topicDao()
+            database.reminderDao(),
+            database.topicDao()
         )
     }
 
@@ -48,9 +48,11 @@ class ReadTopicFragment : Fragment() {
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
         val topicAdapter = TopicAdapter()
 
-        appViewModel.getTopics().observe(this.viewLifecycleOwner) {
+        appViewModel
+            .getTopics()
+            .observe(this.viewLifecycleOwner) {
                 topics -> topicAdapter.updateData(topics)
-        }
+            }
 
         recycler.apply {
             adapter = topicAdapter
@@ -65,9 +67,4 @@ class ReadTopicFragment : Fragment() {
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReadTopicFragment()
-    }
 }
