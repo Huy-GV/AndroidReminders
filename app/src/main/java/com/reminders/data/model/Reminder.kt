@@ -6,13 +6,11 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(foreignKeys = arrayOf(
-    ForeignKey(
-        entity = Topic::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("id"),
-        onDelete = ForeignKey.CASCADE)
-    )
+@Entity(foreignKeys = [ForeignKey(
+    entity = Topic::class,
+    parentColumns = ["id"],
+    childColumns = ["topicId"],
+    onDelete = ForeignKey.CASCADE)]
 )
 data class Reminder(
     @PrimaryKey(autoGenerate = true)

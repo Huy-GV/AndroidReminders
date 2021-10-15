@@ -13,8 +13,8 @@ interface ReminderDao {
     suspend fun update(reminder: Reminder)
     @Delete
     suspend fun delete(reminder: Reminder)
-    @Query("SELECT * from reminder WHERE topicId = :topicId ORDER BY deadline DESC")
+    @Query("SELECT * FROM reminder WHERE topicId = :topicId ORDER BY deadline DESC")
     fun getAll(topicId: Int): Flow<List<Reminder>>
-    @Query("SELECT * from reminder WHERE id = :id")
+    @Query("SELECT * FROM reminder WHERE id = :id")
     fun getReminder(id: Int): Flow<Reminder>
 }
