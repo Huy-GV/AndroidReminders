@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.reminders.AppViewModel
@@ -19,7 +20,8 @@ class ReminderAdapter(
     private val viewModel: AppViewModel
 ) : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
     class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val content = itemView.findViewById<CheckBox>(R.id.reminder_content)
+        val checkButton = itemView.findViewById<RadioButton>(R.id.reminder_check)
+        val content = itemView.findViewById<TextView>(R.id.reminder_content)
         val deadline = itemView.findViewById<TextView>(R.id.reminder_deadline)
         val priority = itemView.findViewById<TextView>(R.id.reminder_priority)
     }
@@ -44,8 +46,9 @@ class ReminderAdapter(
         val reminder = reminders[position]
         holder.apply {
             content.text = reminder.content
-            content.isChecked = false
-            content.setOnCheckedChangeListener { _, isChecked ->
+
+            checkButton.isChecked = false
+            checkButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     viewModel.deleteReminder(reminder)
                 }

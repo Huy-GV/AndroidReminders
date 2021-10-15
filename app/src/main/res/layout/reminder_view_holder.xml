@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,38 +8,70 @@
     android:padding="10dp"
     app:cardCornerRadius="12dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="91dp"
         android:orientation="vertical">
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reminder_content"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:padding="5dp"
-            android:text="reminder content" />
 
 
+        <RadioButton
+            android:id="@+id/reminder_check"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/reminder_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@id/reminder_check"
+            android:text="reminder content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/reminder_check"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.239" />
+
+        <TextView
             android:id="@+id/reminder_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/reminder_check"
+            android:layout_marginTop="38dp"
+            android:padding="5dp"
             android:text="reminder deadline"
             android:textSize="15sp"
-            android:padding="5dp"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reminder_check"
+            app:layout_constraintVertical_bias="1.0" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/reminder_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:padding="5dp"
             android:text="priority"
             android:textSize="15sp"
-            android:padding="5dp"
-            />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.967"
+            app:layout_constraintStart_toEndOf="@+id/reminder_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.114" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.google.android.material.card.MaterialCardView>
