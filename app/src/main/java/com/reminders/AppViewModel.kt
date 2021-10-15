@@ -44,7 +44,11 @@ class AppViewModel(
         }
     }
 
-
+    fun deleteTopic(topicId: Int) {
+        viewModelScope.launch {
+            topicDao.delete(topicId)
+        }
+    }
 
     class Factory(
         private val reminderDao: ReminderDao,

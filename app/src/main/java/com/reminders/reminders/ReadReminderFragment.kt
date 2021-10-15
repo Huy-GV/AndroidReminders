@@ -1,10 +1,8 @@
 package com.reminders.reminders
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
+import android.view.Menu
+import android.view.MenuItem
+import com.reminders.topics.TopicDeletionDialogFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class ReadReminderFragment : Fragment() {
@@ -29,12 +26,31 @@ class ReadReminderFragment : Fragment() {
             database.topicDao()
         )
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             topicId = it.getInt(TOPIC_ID)
         }
+        setHasOptionsMenu(true)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.reminder_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_topic -> {
+                TopicDeletionDialogFragment(topicId!!, appViewModel, findNavController())
+                    .show(requireFragmentManager(), TopicDeletionDialogFragment.TAG)
+            }
+            R.id.edit_topic -> {
+
+            }
+        }
+        return true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

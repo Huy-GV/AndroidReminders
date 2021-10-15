@@ -10,8 +10,10 @@ interface TopicDao {
     suspend fun create(topic: Topic)
     @Update
     suspend fun update(topic: Topic)
-    @Delete
-    suspend fun delete(topic: Topic)
+//    @Delete
+//    suspend fun delete(topic: Topic)
+    @Query("DELETE FROM topic WHERE id = :topicId")
+    suspend fun delete(topicId: Int)
     @Query("SELECT * from topic ORDER BY name ASC")
     fun getAll(): Flow<List<Topic>>
     @Query("SELECT * from topic WHERE id = :id")
