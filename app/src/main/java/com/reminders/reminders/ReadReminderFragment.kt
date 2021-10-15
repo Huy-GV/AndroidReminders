@@ -43,7 +43,7 @@ class ReadReminderFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
-        val reminderAdapter = ReminderAdapter()
+        val reminderAdapter = ReminderAdapter(appViewModel)
 
         appViewModel
             .getReminders(topicId!!)

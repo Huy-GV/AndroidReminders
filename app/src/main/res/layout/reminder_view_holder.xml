@@ -11,16 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
+        <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/reminder_content"
-            android:text="reminder content"
             android:textStyle="bold"
             android:textSize="15sp"
             android:padding="5dp"
-            />
+            android:text="reminder content" />
+
+
 
         <TextView
             android:layout_width="match_parent"

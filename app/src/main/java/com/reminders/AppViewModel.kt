@@ -38,6 +38,12 @@ class AppViewModel(
         }
     }
 
+    fun deleteReminder(reminder: Reminder) {
+        viewModelScope.launch {
+            reminderDao.delete(reminder)
+        }
+    }
+
 
 
     class Factory(

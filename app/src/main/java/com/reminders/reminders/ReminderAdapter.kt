@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.inflate
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.data.model.Reminder
 import com.reminders.data.model.Topic
@@ -13,9 +15,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectIndexed
 import org.w3c.dom.Text
 
-class ReminderAdapter() : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
+class ReminderAdapter(
+    private val viewModel: AppViewModel
+) : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
     class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val content = itemView.findViewById<TextView>(R.id.reminder_content)
+        val content = itemView.findViewById<CheckBox>(R.id.reminder_content)
         val deadline = itemView.findViewById<TextView>(R.id.reminder_deadline)
         val priority = itemView.findViewById<TextView>(R.id.reminder_priority)
     }
@@ -40,9 +44,14 @@ class ReminderAdapter() : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>(
         val reminder = reminders[position]
         holder.apply {
             content.text = reminder.content
+            content.isChecked = false
+            content.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    viewModel.deleteReminder(reminder)
+                }
+            }
             deadline.text = reminder.deadline.toString()
             priority.text = reminder.priority.toString()
-
         }
     }
 
