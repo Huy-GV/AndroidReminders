@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.reminders.AppViewModel
 import com.reminders.R
 
@@ -17,8 +18,7 @@ import com.reminders.R
 
 class TopicDeletionDialogFragment(
     private val topicId: Int,
-    private val appViewModel: AppViewModel,
-    private val navController: NavController
+    private val appViewModel: AppViewModel
 ) : DialogFragment() {
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class TopicDeletionDialogFragment(
             .setMessage("Are you sure you want to delete this topic?")
             .setPositiveButton("DELETE") { _,_ ->
                 appViewModel.deleteTopic(topicId)
-                navController.navigateUp()
+                findNavController().navigateUp()
                 dismiss()
             }
             .setNegativeButton("CANCEL") { _, _ -> dismiss() }

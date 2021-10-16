@@ -16,9 +16,13 @@ import android.view.MenuItem
 import com.reminders.topics.TopicDeletionDialogFragment
 
 
+//TODO: backstack doesnt work here
 
+//TODO: UPDATE THE NAME OF THE APP BAR
 class ReadReminderFragment : Fragment() {
     private var topicId: Int? = null
+    private var topicName: String? = null
+
     private val appViewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
@@ -31,6 +35,7 @@ class ReadReminderFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             topicId = it.getInt(TOPIC_ID)
+            topicName = it.getString(TOPIC_NAME)
         }
         setHasOptionsMenu(true)
     }
@@ -43,11 +48,13 @@ class ReadReminderFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.delete_topic -> {
-                TopicDeletionDialogFragment(topicId!!, appViewModel, findNavController())
+                TopicDeletionDialogFragment(topicId!!, appViewModel)
                     .show(requireFragmentManager(), TopicDeletionDialogFragment.TAG)
             }
             R.id.edit_topic -> {
-
+                findNavController().navigate(
+                    ReadReminderFragmentDirections.
+                    actionReadReminderFragmentToTopicUpdateFragment(topicId!!,topicName!!))
             }
         }
         return true
@@ -73,16 +80,16 @@ class ReadReminderFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
-            val action =
-                ReadReminderFragmentDirections
-                    .actionReadReminderFragmentToCreateReminderFragment(topicId!!)
-            findNavController().navigate(action)
+            findNavController().navigate(ReadReminderFragmentDirections
+                .actionReadReminderFragmentToCreateReminderFragment(topicId!!))
         }
 
         return view
     }
 
+    //TODO: MAKE THIS A GLOBAL STATIC OBJECT
     companion object {
         val TOPIC_ID = "topic_id"
+        val TOPIC_NAME = "topic_name"
     }
 }

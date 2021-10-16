@@ -31,6 +31,12 @@
         <action
             android:id="@+id/action_readReminderFragment_to_createReminderFragment"
             app:destination="@id/createReminderFragment" />
+        <action
+            android:id="@+id/action_readReminderFragment_to_topicUpdateFragment"
+            app:destination="@id/topicUpdateFragment" />
+        <argument
+            android:name="topic_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/createReminderFragment"
@@ -50,4 +56,16 @@
             android:id="@+id/action_topicDeletionDialogFragment_to_readTopicFragment"
             app:destination="@id/readTopicFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/topicUpdateFragment"
+        android:name="com.reminders.topics.TopicUpdateFragment"
+        android:label="fragment_topic_update"
+        tools:layout="@layout/fragment_topic_update" >
+        <argument
+            android:name="update_topic_id"
+            app:argType="integer" />
+        <argument
+            android:name="update_topic_name"
+            app:argType="string" />
+    </fragment>
 </navigation>

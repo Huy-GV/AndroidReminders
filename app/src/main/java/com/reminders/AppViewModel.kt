@@ -50,6 +50,12 @@ class AppViewModel(
         }
     }
 
+    fun updateTopic(topicId: Int, name: String) {
+        viewModelScope.launch {
+            topicDao.update(topicId, name)
+        }
+    }
+
     class Factory(
         private val reminderDao: ReminderDao,
         private val topicDao: TopicDao

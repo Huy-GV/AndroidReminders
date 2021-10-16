@@ -47,7 +47,7 @@ class TopicAdapter(
             creationDate.text = topic.creationDate.toString()
             card.setOnClickListener {
                 val action = ReadTopicFragmentDirections
-                    .actionReadTopicFragmentToReadReminderFragment(topic.id)
+                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name)
                     navController.navigate(action)
             }
         }
