@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/readTopicFragment"
         android:name="com.reminders.topics.ReadTopicFragment"
-        android:label="fragment_read_topic"
+        android:label="Home"
         tools:layout="@layout/fragment_read_topic" >
         <action
             android:id="@+id/action_readTopicFragment_to_createTopicFragment"
@@ -19,11 +19,11 @@
     <fragment
         android:id="@+id/createTopicFragment"
         android:name="com.reminders.topics.CreateTopicFragment"
-        android:label="CreateTopicFragment" />
+        android:label="Add new topic" />
     <fragment
         android:id="@+id/readReminderFragment"
         android:name="com.reminders.reminders.ReadReminderFragment"
-        android:label="fragment_read_reminder"
+        android:label="Reminders"
         tools:layout="@layout/fragment_read_reminder" >
         <argument
             android:name="topic_id"
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/createReminderFragment"
         android:name="com.reminders.reminders.CreateReminderFragment"
-        android:label="fragment_create_reminder"
+        android:label="Add new reminder"
         tools:layout="@layout/fragment_create_reminder" >
         <argument
             android:name="topic_id"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/topicUpdateFragment"
         android:name="com.reminders.topics.TopicUpdateFragment"
-        android:label="fragment_topic_update"
+        android:label="Edit topic"
         tools:layout="@layout/fragment_topic_update" >
         <argument
             android:name="update_topic_id"
@@ -74,7 +74,7 @@
     <fragment
         android:id="@+id/updateReminderFragment"
         android:name="com.reminders.reminders.UpdateReminderFragment"
-        android:label="fragment_update_reminder"
+        android:label="Edit reminder"
         tools:layout="@layout/fragment_update_reminder" >
         <argument
             android:name="reminder"
