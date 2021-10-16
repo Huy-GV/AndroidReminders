@@ -37,6 +37,9 @@
         <argument
             android:name="topic_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_readReminderFragment_to_updateReminderFragment"
+            app:destination="@id/updateReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/createReminderFragment"
@@ -67,5 +70,14 @@
         <argument
             android:name="update_topic_name"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateReminderFragment"
+        android:name="com.reminders.reminders.UpdateReminderFragment"
+        android:label="fragment_update_reminder"
+        tools:layout="@layout/fragment_update_reminder" >
+        <argument
+            android:name="reminder"
+            app:argType="com.reminders.data.model.Reminder" />
     </fragment>
 </navigation>

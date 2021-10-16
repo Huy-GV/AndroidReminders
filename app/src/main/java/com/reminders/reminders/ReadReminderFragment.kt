@@ -1,5 +1,6 @@
 package com.reminders.reminders
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -31,6 +32,8 @@ class ReadReminderFragment : Fragment() {
         )
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,6 +41,7 @@ class ReadReminderFragment : Fragment() {
             topicName = it.getString(TOPIC_NAME)
         }
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -66,7 +70,12 @@ class ReadReminderFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
-        val reminderAdapter = ReminderAdapter(appViewModel)
+        val reminderAdapter = ReminderAdapter(
+            appViewModel,
+            findNavController(),
+            fragmentManager!!
+        )
+
 
         appViewModel
             .getReminders(topicId!!)
@@ -80,12 +89,14 @@ class ReadReminderFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
-            findNavController().navigate(ReadReminderFragmentDirections
-                .actionReadReminderFragmentToCreateReminderFragment(topicId!!))
+            findNavController()
+                .navigate(ReadReminderFragmentDirections
+                    .actionReadReminderFragmentToCreateReminderFragment(topicId!!))
         }
 
         return view
     }
+
 
     //TODO: MAKE THIS A GLOBAL STATIC OBJECT
     companion object {

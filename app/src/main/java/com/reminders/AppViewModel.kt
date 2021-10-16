@@ -56,6 +56,12 @@ class AppViewModel(
         }
     }
 
+    fun updateReminder(reminder: Reminder) {
+        viewModelScope.launch {
+            reminderDao.update(reminder)
+        }
+    }
+
     class Factory(
         private val reminderDao: ReminderDao,
         private val topicDao: TopicDao

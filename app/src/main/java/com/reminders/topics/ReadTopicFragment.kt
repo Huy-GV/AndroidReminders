@@ -14,16 +14,7 @@ import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReadTopicFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReadTopicFragment : Fragment() {
 
 
@@ -33,13 +24,6 @@ class ReadTopicFragment : Fragment() {
             database.reminderDao(),
             database.topicDao()
         )
-    }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -64,8 +48,9 @@ class ReadTopicFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.create_topic_button).setOnClickListener {
-            val action = ReadTopicFragmentDirections.actionReadTopicFragmentToCreateTopicFragment()
-            this.findNavController().navigate(action)
+            findNavController()
+                .navigate(ReadTopicFragmentDirections
+                    .actionReadTopicFragmentToCreateTopicFragment())
         }
 
         return view
