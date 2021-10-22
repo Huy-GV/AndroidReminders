@@ -10,7 +10,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_topic_prompt"
+        android:text="NEW TOPIC"
         android:height="60sp"
         android:textAlignment="center"
         android:textSize="30sp"

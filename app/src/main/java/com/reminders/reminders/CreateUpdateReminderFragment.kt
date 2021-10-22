@@ -14,16 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.reminders.AppViewModel
+import com.reminders.MainActivity
 import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
 import com.reminders.misc.DatePickerFragment
-import com.reminders.topics.DeleteTopicDialogFragment
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -40,8 +38,6 @@ class CreateUpdateReminderFragment : Fragment() {
     private lateinit var priorityField: AutoCompleteTextView
     private lateinit var positiveButton: Button
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private val df: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
     private val appViewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
@@ -75,6 +71,7 @@ class CreateUpdateReminderFragment : Fragment() {
         }
 
 
+
         priorities = resources.getStringArray(R.array.priorities)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities)
         priorityField.setAdapter(arrayAdapter)
@@ -96,7 +93,8 @@ class CreateUpdateReminderFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setUpdateAction(reminder: Reminder) {
-        positiveButton.text = "SAVE"
+
+        positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
         if (reminder.deadline == null) {
             deadlineField.setText("")
@@ -121,7 +119,8 @@ class CreateUpdateReminderFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateAction() {
-        positiveButton.text = "CREATE"
+
+        positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
 
             appViewModel.createReminder(
@@ -138,14 +137,14 @@ class CreateUpdateReminderFragment : Fragment() {
     private fun getPriorityLevel(priority: String) : Int {
         val priorities = resources.getStringArray(R.array.priorities)
         priorities.forEachIndexed { index, priorityString ->
-            if (priorityString == priority) return@getPriorityLevel index;
+            if (priorityString == priority) return@getPriorityLevel index
         }
         return 1
     }
 
     companion object {
-        val TOPIC_ID = "topic_id"
-        val REMINDER = "reminder"
-        val ACTION = "action_type"
+        const val TOPIC_ID = "topic_id"
+        const val REMINDER = "reminder"
+        const val ACTION = "action_type"
     }
 }

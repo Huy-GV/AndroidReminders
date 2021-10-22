@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
-import com.reminders.reminders.ReadReminderFragment
 
 
 class TopicUpdateFragment : Fragment() {
@@ -58,8 +57,8 @@ class TopicUpdateFragment : Fragment() {
     }
 
     companion object {
-        val TOPIC_ID = "update_topic_id"
-        val TOPIC_NAME = "update_topic_name"
+        const val TOPIC_ID = "update_topic_id"
+        const val TOPIC_NAME = "update_topic_name"
     }
 
 

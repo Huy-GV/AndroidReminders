@@ -24,18 +24,17 @@ import com.reminders.data.model.Reminder
 class ReminderAdapter(
     private val viewModel: AppViewModel,
     private val navController: NavController,
-    private val fragmentManager: FragmentManager
+    private val updateReminderLabel: String
 ) : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
     class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val checkButton = itemView.findViewById<RadioButton>(R.id.reminder_check)
-        val content = itemView.findViewById<TextView>(R.id.reminder_content)
-        val card = itemView.findViewById<MaterialCardView>(R.id.reminder_card)
-        val deadline = itemView.findViewById<TextView>(R.id.reminder_deadline)
-        val priority = itemView.findViewById<TextView>(R.id.reminder_priority)
-
+        val checkButton: RadioButton = itemView.findViewById(R.id.reminder_check)
+        val content: TextView = itemView.findViewById(R.id.reminder_content)
+        val card: MaterialCardView = itemView.findViewById(R.id.reminder_card)
+        val deadline: TextView = itemView.findViewById(R.id.reminder_deadline)
+        val priority: TextView = itemView.findViewById(R.id.reminder_priority)
     }
 
-    val reminders = mutableListOf<Reminder>()
+    private val reminders = mutableListOf<Reminder>()
 
     fun updateData(newData: List<Reminder>) {
         reminders.clear()
@@ -63,10 +62,14 @@ class ReminderAdapter(
                 }
             }
             card.setOnClickListener {
-                //open edit reminder
                 navController
                     .navigate(ReadReminderFragmentDirections
-                    .actionReadReminderFragmentToCreateUpdateReminderFragment(reminder.topicId, Action.UPDATE, reminder))
+                    .actionReadReminderFragmentToCreateUpdateReminderFragment(
+                        reminder.topicId,
+                        Action.UPDATE,
+                        reminder,
+                        updateReminderLabel
+                    ))
             }
 
             if (reminder.deadline == null ) {

@@ -6,13 +6,10 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.reminders.R
 import com.reminders.data.model.Topic
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectIndexed
 import java.time.format.DateTimeFormatter
 
 class TopicAdapter(
@@ -21,9 +18,9 @@ class TopicAdapter(
     ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var name = view.findViewById<TextView>(R.id.topic_name)
-        var creationDate = view.findViewById<TextView>(R.id.topic_creation_date)
-        var card = view.findViewById<MaterialCardView>(R.id.topic_card)
+        var name: TextView = view.findViewById(R.id.topic_name)
+        var creationDate: TextView = view.findViewById(R.id.topic_creation_date)
+        var card: MaterialCardView = view.findViewById(R.id.topic_card)
     }
 
     val topics = mutableListOf<Topic>()

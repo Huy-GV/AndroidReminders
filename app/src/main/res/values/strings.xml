@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Reminders</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="create_topic_prompt">Enter topic name</string>
-    <string name="create_reminder_prompt">enter reminder</string>
-
+    <string name="cancel_button">CANCEL</string>
+    <string name="save_changes">SAVE</string>
+    <string name="add_new">ADD</string>
+    <string name="delete">DELETE</string>
+    <string name="deadline_hint">Deadline</string>
+    <string name="priority_hint">Priority</string>
+    <string name="add_reminder_label">Add reminder to&#160;</string>
+    <string name="update_reminder_label">Update reminder</string>
     <string-array name="priorities">
         <item>Low</item>
         <item>Medium</item>

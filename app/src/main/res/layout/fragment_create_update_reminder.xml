@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:hint="Deadline"
+        android:hint="@string/deadline_hint"
         android:clickable="true"
         android:focusable="false">
 
@@ -55,7 +55,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Priority"
         android:layout_margin="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
 
@@ -64,10 +63,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/reminder_priority_field"
             android:inputType="none"
-            />
+            android:hint="@string/priority_hint"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
     <LinearLayout
@@ -80,14 +78,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="CANCEL"
+            android:text="@string/cancel_button"
             android:layout_margin="10dp"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:text="Create "
+            android:text="@string/add_new"
             android:layout_margin="10dp"
             android:id="@+id/positive_reminder_button"/>
     </LinearLayout>

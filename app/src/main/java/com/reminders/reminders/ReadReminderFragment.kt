@@ -19,7 +19,6 @@ import com.reminders.topics.DeleteTopicDialogFragment
 
 //TODO: backstack doesnt work here
 
-//TODO: UPDATE THE NAME OF THE APP BAR
 class ReadReminderFragment : Fragment() {
     private var topicId: Int? = null
     private var topicName: String? = null
@@ -31,8 +30,6 @@ class ReadReminderFragment : Fragment() {
             database.topicDao()
         )
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +70,7 @@ class ReadReminderFragment : Fragment() {
         val reminderAdapter = ReminderAdapter(
             appViewModel,
             findNavController(),
-            childFragmentManager
+            resources.getString(R.string.update_reminder_label)
         )
 
 
@@ -91,16 +88,20 @@ class ReadReminderFragment : Fragment() {
         view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
             findNavController()
                 .navigate(ReadReminderFragmentDirections
-                    .actionReadReminderFragmentToCreateUpdateReminderFragment(topicId!!, Action.CREATE, null))
+                    .actionReadReminderFragmentToCreateUpdateReminderFragment(
+                        topicId!!,
+                        Action.CREATE,
+                        null,
+                        resources.getString(R.string.add_reminder_label) + topicName
+                    ))
         }
 
         return view
     }
 
 
-    //TODO: MAKE THIS A GLOBAL STATIC OBJECT
     companion object {
-        val TOPIC_ID = "topic_id"
-        val TOPIC_NAME = "topic_name"
+        const val TOPIC_ID = "topic_id"
+        const val TOPIC_NAME = "topic_name"
     }
 }
