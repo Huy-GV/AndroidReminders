@@ -1,5 +1,6 @@
 package com.reminders.topics
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
@@ -14,6 +16,7 @@ import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.model.Topic
+import java.time.LocalDate
 import java.util.*
 
 
@@ -31,6 +34,7 @@ class CreateTopicFragment : Fragment() {
 //        super.onCreate(savedInstanceState)
 //    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +47,7 @@ class CreateTopicFragment : Fragment() {
             if (editText.text.isBlank()) {
                 editText.error = "Topic name must not be empty"
             } else {
-                appViewModel.createTopic(editText.text.toString(), Calendar.getInstance().getTime())
+                appViewModel.createTopic(editText.text.toString(), LocalDate.now())
                 findNavController().navigateUp()
             }
         }

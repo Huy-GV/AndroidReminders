@@ -8,10 +8,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.reminders.AppViewModel
 import com.reminders.R
+import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
 
 
@@ -58,11 +61,17 @@ class ReminderAdapter(
             }
             card.setOnClickListener {
                 //open edit reminder
-                UpdateReminderFragment(viewModel, reminder)
-                    .show(fragmentManager, UpdateReminderFragment.TAG)
+                navController
+                    .navigate(ReadReminderFragmentDirections
+                    .actionReadReminderFragmentToCreateUpdateReminderFragment(reminder.topicId, Action.UPDATE, reminder))
             }
 
-            deadline.text = reminder.deadline.toString()
+            if (reminder.deadline == null ) {
+                deadline.text =  ""
+            } else {
+                deadline.text = reminder.deadline.toString()
+            }
+
             priority.text = reminder.priority.toString()
         }
     }

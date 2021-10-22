@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.time.LocalDate
 import java.util.*
 
 @Parcelize
@@ -21,7 +22,7 @@ data class Reminder(
     @ColumnInfo(name = "content")
     var content: String,
     @ColumnInfo(name = "deadline")
-    var deadline: Date?,
+    var deadline: LocalDate?,
     @ColumnInfo(name = "priority")
     var priority: Int,
     @ColumnInfo(name = "topicId")

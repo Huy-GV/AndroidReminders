@@ -15,6 +15,8 @@ import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentActivity
+import com.reminders.data.enum.Action
+import com.reminders.data.model.Reminder
 import com.reminders.topics.TopicDeletionDialogFragment
 
 
@@ -92,7 +94,7 @@ class ReadReminderFragment : Fragment() {
         view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
             findNavController()
                 .navigate(ReadReminderFragmentDirections
-                    .actionReadReminderFragmentToCreateReminderFragment(topicId!!))
+                    .actionReadReminderFragmentToCreateUpdateReminderFragment(topicId!!, Action.CREATE, null))
         }
 
         return view

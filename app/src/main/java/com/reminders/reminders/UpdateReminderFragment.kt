@@ -45,7 +45,7 @@ class UpdateReminderFragment(
         confirmButton.setOnClickListener {
             reminder.apply {
                 content = newName.text.toString()
-                deadline = LocalDate.parse(newDeadline.text.toString(), DateTimeFormatter.ISO_DATE) as Date
+                deadline = LocalDate.parse(newDeadline.text.toString(), DateTimeFormatter.ISO_DATE)
                 priority = newPriority.text.toString().toInt()
                 reminder.topicId
             }
