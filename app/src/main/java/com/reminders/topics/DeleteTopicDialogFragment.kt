@@ -11,12 +11,13 @@ import com.reminders.R
 
 class DeleteTopicDialogFragment(
     private val topicId: Int,
-    private val appViewModel: AppViewModel
+    private val appViewModel: AppViewModel,
+    private val deleteWarning: String
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
-            .setMessage("Are you sure you want to delete this topic?")
+            .setMessage(deleteWarning)
             .setPositiveButton(resources.getString(R.string.delete)) { _,_ ->
                 appViewModel.deleteTopic(topicId)
                 findNavController().navigateUp()

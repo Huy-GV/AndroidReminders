@@ -48,8 +48,15 @@ class ReadReminderFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.delete_topic -> {
-                DeleteTopicDialogFragment(topicId!!, appViewModel)
-                    .show(parentFragmentManager, DeleteTopicDialogFragment.TAG)
+                DeleteTopicDialogFragment(
+                    topicId!!,
+                    appViewModel,
+                    resources.getString(R.string.delete_topic_warning, topicName)
+                )
+                    .show(
+                        parentFragmentManager,
+                        DeleteTopicDialogFragment.TAG,
+                    )
             }
             R.id.edit_topic -> {
                 findNavController().navigate(
