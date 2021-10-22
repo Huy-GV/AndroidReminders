@@ -6,11 +6,19 @@
     tools:context=".topics.ReadTopicFragment"
     android:orientation="vertical">
 
-    <Button
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/create_topic_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create topic"
-        android:id="@+id/create_topic_button"/>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="add new"
+        android:src="@drawable/ic_add_icon"
+        android:text="Create topic" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/topic_recycler"

@@ -5,51 +5,62 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".reminders.CreateReminderFragment">
+    tools:context=".reminders.CreateReminderFragment"
+    android:padding="50dp">
 
-    <TextView
-        android:id="@+id/textView3"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_reminder_prompt"
-        android:height="60sp"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:hint="Content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CONTENT"
             android:id="@+id/reminder_content_field"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:hint="Deadline">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="DEADLINE"
+            android:layout_height="match_parent"
             android:inputType="date"
             android:id="@+id/reminder_deadline_field"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
+
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="PRIORITY"-->
+<!--        android:inputType="numberDecimal"-->
+<!--        android:id="@+id/reminder_priority_field"/>-->
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Priority"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="PRIORITY"
-            android:inputType="numberDecimal"
-            android:id="@+id/reminder_priority_field"/>
+            android:id="@+id/reminder_priority_field"
+            android:inputType="none"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -14,6 +14,7 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.FragmentActivity
 import com.reminders.topics.TopicDeletionDialogFragment
 
 
@@ -73,7 +74,7 @@ class ReadReminderFragment : Fragment() {
         val reminderAdapter = ReminderAdapter(
             appViewModel,
             findNavController(),
-            fragmentManager!!
+            childFragmentManager
         )
 
 

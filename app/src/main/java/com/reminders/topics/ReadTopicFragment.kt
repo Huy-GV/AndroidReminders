@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
@@ -47,7 +48,7 @@ class ReadTopicFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@ReadTopicFragment.context)
         }
 
-        view.findViewById<Button>(R.id.create_topic_button).setOnClickListener {
+        view.findViewById<FloatingActionButton>(R.id.create_topic_button).setOnClickListener {
             findNavController()
                 .navigate(ReadTopicFragmentDirections
                     .actionReadTopicFragmentToCreateTopicFragment())

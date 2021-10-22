@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
@@ -49,19 +51,32 @@ class CreateReminderFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_create_reminder, container, false)
         val contentField = view.findViewById<TextInputEditText>(R.id.reminder_content_field)
         val deadlineField = view.findViewById<TextInputEditText>(R.id.reminder_deadline_field)
-        val priorityField = view.findViewById<TextInputEditText>(R.id.reminder_priority_field)
+        val priorityField = view.findViewById<AutoCompleteTextView>(R.id.reminder_priority_field)
+
+        val priorities = resources.getStringArray(R.array.priorities)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities)
+        priorityField.setAdapter(arrayAdapter)
+
         view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
 
             appViewModel.createReminder(
                 content = contentField.text.toString(),
                 deadline = Date(deadlineField.text.toString()),
-                priority = priorityField.text.toString().toInt(),
+                priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = topicId!!
             )
             findNavController().navigateUp()
         }
 
         return view
+    }
+
+    private fun getPriorityLevel(priority: String) : Int {
+        val priorities = resources.getStringArray(R.array.priorities)
+        priorities.forEachIndexed { index, priorityString ->
+            if (priorityString == priority) return@getPriorityLevel index;
+        }
+        return 1
     }
 
 }
