@@ -67,7 +67,6 @@ class CreateReminderFragment : Fragment() {
             )
             findNavController().navigateUp()
         }
-
         return view
     }
 
@@ -76,7 +75,11 @@ class CreateReminderFragment : Fragment() {
         priorities.forEachIndexed { index, priorityString ->
             if (priorityString == priority) return@getPriorityLevel index;
         }
+
         return 1
     }
+
+
+
 
 }
