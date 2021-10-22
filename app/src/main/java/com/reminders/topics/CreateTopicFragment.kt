@@ -30,9 +30,7 @@ class CreateTopicFragment : Fragment() {
         )
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(

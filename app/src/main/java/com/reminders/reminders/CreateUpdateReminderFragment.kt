@@ -2,6 +2,7 @@ package com.reminders.reminders
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
+import com.reminders.misc.DatePickerFragment
+import com.reminders.topics.DeleteTopicDialogFragment
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -75,6 +79,13 @@ class CreateUpdateReminderFragment : Fragment() {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities)
         priorityField.setAdapter(arrayAdapter)
 
+
+        deadlineField.setOnClickListener {
+            Log.d("huy", "deadline clicked")
+            DatePickerFragment(appViewModel)
+                .show(parentFragmentManager, DatePickerFragment.TAG)
+        }
+
         when (action ){
             Action.CREATE -> setCreateAction()
             Action.UPDATE -> setUpdateAction(reminder!!)
@@ -87,17 +98,22 @@ class CreateUpdateReminderFragment : Fragment() {
     private fun setUpdateAction(reminder: Reminder) {
         positiveButton.text = "SAVE"
         contentField.setText(reminder.content)
-        deadlineField.setText(reminder.deadline.toString())
+        if (reminder.deadline == null) {
+            deadlineField.setText("")
+        } else {
+            deadlineField.setText(reminder.deadline!!.format(appViewModel.dateFormatter))
+        }
+
         priorityField.setText(priorities[reminder.priority])
 
         //TODO: priority select no working
         positiveButton.setOnClickListener {
             reminder.apply {
                 content = contentField.text.toString()
-                deadline = LocalDate.parse(deadlineField.text.toString(), df)
+                deadline = LocalDate.parse(appViewModel.dateString, appViewModel.dateFormatter)
                 priority = getPriorityLevel(priorityField.text.toString())
             }
-
+            appViewModel.dateString = ""
             appViewModel.updateReminder(reminder)
             findNavController().navigateUp()
         }
@@ -110,10 +126,11 @@ class CreateUpdateReminderFragment : Fragment() {
 
             appViewModel.createReminder(
                 content = contentField.text.toString(),
-                rawDeadline = deadlineField.text.toString(),
+                rawDeadline = appViewModel.dateString,
                 priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = topicId!!
             )
+            appViewModel.dateString = ""
             findNavController().navigateUp()
         }
     }

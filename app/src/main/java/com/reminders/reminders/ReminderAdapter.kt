@@ -1,11 +1,13 @@
 package com.reminders.reminders
 
 import android.app.Activity
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
@@ -49,6 +51,7 @@ class ReminderAdapter(
         return TopicViewHolder(inflatedLayout)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
         val reminder = reminders[position]
         holder.apply {
@@ -69,7 +72,7 @@ class ReminderAdapter(
             if (reminder.deadline == null ) {
                 deadline.text =  ""
             } else {
-                deadline.text = reminder.deadline.toString()
+                deadline.text = reminder.deadline!!.format(viewModel.dateFormatter)
             }
 
             priority.text = reminder.priority.toString()

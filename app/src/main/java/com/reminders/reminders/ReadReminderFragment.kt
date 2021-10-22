@@ -53,7 +53,7 @@ class ReadReminderFragment : Fragment() {
         when (item.itemId) {
             R.id.delete_topic -> {
                 DeleteTopicDialogFragment(topicId!!, appViewModel)
-                    .show(requireFragmentManager(), DeleteTopicDialogFragment.TAG)
+                    .show(parentFragmentManager, DeleteTopicDialogFragment.TAG)
             }
             R.id.edit_topic -> {
                 findNavController().navigate(

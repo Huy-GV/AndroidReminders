@@ -13,9 +13,11 @@ import com.reminders.R
 import com.reminders.data.model.Topic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectIndexed
+import java.time.format.DateTimeFormatter
 
 class TopicAdapter(
-    private val navController: NavController
+    private val navController: NavController,
+    private val dateFormatter: DateTimeFormatter
     ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -44,7 +46,7 @@ class TopicAdapter(
         val topic = topics[position]
         holder.apply {
             name.text = topic.name
-            creationDate.text = topic.creationDate.toString()
+            creationDate.text = topic.creationDate.format(dateFormatter)
             card.setOnClickListener {
                 val action = ReadTopicFragmentDirections
                     .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name)

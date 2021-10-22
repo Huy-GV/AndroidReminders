@@ -19,8 +19,10 @@ class AppViewModel(
 
 ) : ViewModel() {
 
+    var dateString: String = ""
+
     @RequiresApi(Build.VERSION_CODES.O)
-    private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
+    val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
 
     fun getTopics() : LiveData<List<Topic>> {
         return topicDao.getAll().asLiveData()

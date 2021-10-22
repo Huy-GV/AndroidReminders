@@ -8,6 +8,7 @@
     tools:context=".reminders.CreateUpdateReminderFragment"
     android:padding="50dp">
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,30 +25,31 @@
 
 
 
+
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/reminder_deadline_field"-->
+<!--        style="@style/Widget.MaterialComponents.Button"-->
+<!--        android:text="Deadline"/>-->
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:hint="Deadline">
+        android:hint="Deadline"
+        android:clickable="true"
+        android:focusable="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="date"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
             android:id="@+id/reminder_deadline_field"/>
+
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="PRIORITY"-->
-<!--        android:inputType="numberDecimal"-->
-<!--        android:id="@+id/reminder_priority_field"/>-->
 
 
     <com.google.android.material.textfield.TextInputLayout
