@@ -26,7 +26,8 @@ class ReminderAdapter(
     private val navController: NavController,
     private val updateReminderLabel: String
 ) : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
-    class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    inner class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val checkButton: RadioButton = itemView.findViewById(R.id.reminder_check)
         val content: TextView = itemView.findViewById(R.id.reminder_content)
         val card: MaterialCardView = itemView.findViewById(R.id.reminder_card)

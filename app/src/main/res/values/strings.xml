@@ -8,6 +8,7 @@
     <string name="priority_hint">Priority</string>
     <string name="add_reminder_label">Add reminder to&#160;</string>
     <string name="update_reminder_label">Update reminder</string>
+    <string name="content_hint">Content</string>
     <string-array name="priorities">
         <item>Low</item>
         <item>Medium</item>

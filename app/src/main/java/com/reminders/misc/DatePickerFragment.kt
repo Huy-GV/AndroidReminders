@@ -1,27 +1,17 @@
 package com.reminders.misc
 
-
-import android.app.Dialog
 import android.os.Build
-
 import android.os.Bundle
-import android.text.Selection.setSelection
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.DatePicker
 import androidx.annotation.RequiresApi
-
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.reminders.AppViewModel
 import com.reminders.R
-import java.time.LocalDate
-import java.util.*
 
 class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment() {
 
@@ -31,9 +21,9 @@ class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment()
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var date: Int = 0
-        var month: Int = 0
-        var year: Int = 0
+        var date = 0
+        var month = 0
+        var year = 0
         val view =  inflater.inflate(R.layout.fragment_date_picker, container, false)
         val datePicker = view.findViewById<DatePicker>(R.id.calendarView)
         datePicker.setOnDateChangedListener { _, pickedYear, monthOfYear, dayOfMonth ->
@@ -58,7 +48,7 @@ class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment()
 
 
     companion object {
-        val TAG = "DatePickerDialog"
+        const val TAG = "DatePickerDialog"
     }
 
 }

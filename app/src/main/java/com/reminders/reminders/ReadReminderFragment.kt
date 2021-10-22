@@ -38,7 +38,6 @@ class ReadReminderFragment : Fragment() {
             topicName = it.getString(TOPIC_NAME)
         }
         setHasOptionsMenu(true)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,7 +71,6 @@ class ReadReminderFragment : Fragment() {
             findNavController(),
             resources.getString(R.string.update_reminder_label)
         )
-
 
         appViewModel
             .getReminders(topicId!!)

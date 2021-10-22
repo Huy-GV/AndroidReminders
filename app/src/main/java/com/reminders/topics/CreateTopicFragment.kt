@@ -11,14 +11,10 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
-import com.reminders.data.model.Topic
 import java.time.LocalDate
-import java.util.*
-
 
 class CreateTopicFragment : Fragment() {
     //TODO: create a superclass fragment?

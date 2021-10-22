@@ -2,7 +2,6 @@ package com.reminders.topics
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavController
@@ -17,7 +16,7 @@ class TopicAdapter(
     private val dateFormatter: DateTimeFormatter
     ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
-    class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var name: TextView = view.findViewById(R.id.topic_name)
         var creationDate: TextView = view.findViewById(R.id.topic_creation_date)
         var card: MaterialCardView = view.findViewById(R.id.topic_card)
