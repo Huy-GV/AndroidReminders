@@ -13,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.application.MyApplication
+import com.reminders.data.enum.Action
 
 
 class ReadTopicFragment : Fragment() {
@@ -34,7 +35,11 @@ class ReadTopicFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
-        val topicAdapter = TopicAdapter(this.findNavController(), appViewModel.dateFormatter)
+        val topicAdapter = TopicAdapter(
+            this.findNavController(),
+            appViewModel.dateFormatter,
+            resources
+        )
 
         appViewModel
             .getTopics()
@@ -48,9 +53,14 @@ class ReadTopicFragment : Fragment() {
         }
 
         view.findViewById<FloatingActionButton>(R.id.create_topic_button).setOnClickListener {
-            findNavController()
-                .navigate(ReadTopicFragmentDirections
-                    .actionReadTopicFragmentToCreateTopicFragment())
+            CreateUpdateTopicDialogFragment(
+                Action.CREATE,
+                appViewModel,
+            )
+                .show(
+                    parentFragmentManager,
+                    CreateUpdateTopicDialogFragment.TAG
+                )
         }
 
         return view

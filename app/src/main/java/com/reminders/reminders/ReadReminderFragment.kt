@@ -14,6 +14,7 @@ import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
 import com.reminders.data.enum.Action
+import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
 
 
@@ -59,9 +60,17 @@ class ReadReminderFragment : Fragment() {
                     )
             }
             R.id.edit_topic -> {
-                findNavController().navigate(
-                    ReadReminderFragmentDirections.
-                    actionReadReminderFragmentToTopicUpdateFragment(topicId!!,topicName!!))
+
+                CreateUpdateTopicDialogFragment(
+                    Action.UPDATE,
+                    appViewModel,
+                    topicId!!,
+                    topicName!!
+                )
+                    .show(
+                        parentFragmentManager,
+                        CreateUpdateTopicDialogFragment.TAG
+                    )
             }
         }
         return true

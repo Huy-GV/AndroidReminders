@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Reminders</string>
-    <string name="cancel_button">CANCEL</string>
+    <string name="cancel_button">Cancel</string>
     <string name="save_changes">SAVE</string>
     <string name="add_new">ADD</string>
     <string name="delete">DELETE</string>
@@ -8,14 +8,17 @@
     <string name="priority_hint">Priority</string>
     <string name="add_reminder_label">Add reminder to&#160;</string>
     <string name="delete_topic_warning">Are you sure you want to delete %1s</string>
+    <string name="topic_creation_date">Created on %1s</string>
     <string name="update_reminder_label">Update reminder</string>
     <string name="content_hint">Content</string>
     <string name="delete_topic_label">Delete topic</string>
     <string name="edit_topic_label">Edit topic</string>
+    <string name="empty_topic_name_error">Topic name cannot be empty</string>
     <string-array name="priorities">
         <item>Low</item>
         <item>Medium</item>
         <item>High</item>
         <item>Very High</item>
     </string-array>
+    <string name="topic_name_hint">Name</string>
 </resources>

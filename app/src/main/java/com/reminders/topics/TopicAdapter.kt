@@ -1,9 +1,12 @@
 package com.reminders.topics
 
+import android.content.res.Resources
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -13,7 +16,8 @@ import java.time.format.DateTimeFormatter
 
 class TopicAdapter(
     private val navController: NavController,
-    private val dateFormatter: DateTimeFormatter
+    private val dateFormatter: DateTimeFormatter,
+    private val resources: Resources
     ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     inner class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,23 +42,24 @@ class TopicAdapter(
         return TopicViewHolder(inflatedLayout)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
         val topic = topics[position]
         holder.apply {
             name.text = topic.name
-            creationDate.text = topic.creationDate.format(dateFormatter)
+            creationDate.text = resources.getString(
+                    R.string.topic_creation_date,
+                    topic.creationDate.format(dateFormatter)
+                )
             card.setOnClickListener {
-                val action = ReadTopicFragmentDirections
-                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name)
-                    navController.navigate(action)
+                navController.navigate(
+                    ReadTopicFragmentDirections
+                        .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name))
             }
         }
-
     }
 
     override fun getItemCount(): Int {
         return topics.size
     }
-
-
 }
