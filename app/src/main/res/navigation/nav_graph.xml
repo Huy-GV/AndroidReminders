@@ -38,15 +38,6 @@
             android:id="@+id/action_readReminderFragment_to_createUpdateReminderFragment"
             app:destination="@id/createUpdateReminderFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/topicDeletionDialogFragment"
-        android:name="com.reminders.topics.TopicDeletionDialogFragment"
-        android:label="fragment_topic_deletion_dialog"
-        tools:layout="@layout/fragment_topic_deletion_dialog" >
-        <action
-            android:id="@+id/action_topicDeletionDialogFragment_to_readTopicFragment"
-            app:destination="@id/readTopicFragment" />
-    </dialog>
     <fragment
         android:id="@+id/topicUpdateFragment"
         android:name="com.reminders.topics.TopicUpdateFragment"

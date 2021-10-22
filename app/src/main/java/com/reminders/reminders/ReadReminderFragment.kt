@@ -1,6 +1,5 @@
 package com.reminders.reminders
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -14,10 +13,8 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.FragmentActivity
 import com.reminders.data.enum.Action
-import com.reminders.data.model.Reminder
-import com.reminders.topics.TopicDeletionDialogFragment
+import com.reminders.topics.DeleteTopicDialogFragment
 
 
 //TODO: backstack doesnt work here
@@ -55,8 +52,8 @@ class ReadReminderFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.delete_topic -> {
-                TopicDeletionDialogFragment(topicId!!, appViewModel)
-                    .show(requireFragmentManager(), TopicDeletionDialogFragment.TAG)
+                DeleteTopicDialogFragment(topicId!!, appViewModel)
+                    .show(requireFragmentManager(), DeleteTopicDialogFragment.TAG)
             }
             R.id.edit_topic -> {
                 findNavController().navigate(
