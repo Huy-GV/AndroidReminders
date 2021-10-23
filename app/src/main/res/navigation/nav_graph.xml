@@ -33,10 +33,10 @@
         <action
             android:id="@+id/action_readReminderFragment_to_createUpdateReminderFragment"
             app:destination="@id/createUpdateReminderFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/leave_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/leave_to_right" />
+            app:enterAnim="@anim/enter_from_bottom"
+            app:exitAnim="@anim/leave_to_top"
+            app:popEnterAnim="@anim/enter_from_top"
+            app:popExitAnim="@anim/leave_to_bottom" />
     </fragment>
 
     <fragment
