@@ -91,14 +91,14 @@ class ReminderAdapter(
                 R.string.priority_info,
                 priorities[reminder.priority]
             )
-            setPriorityColor(view, priority, reminder.priority, priorities.size)
+            setPriorityColor(view, priority, reminder.priority, priorities.size - 1)
         }
     }
 
     private fun setPriorityColor(view: View, priorityView: TextView, priority: Int, maxPriority: Int) {
         when (priority) {
-            maxPriority - 1 -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.red))
-            maxPriority - 2 -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.orange))
+            maxPriority -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.red))
+            maxPriority - 1 -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.orange))
         }
     }
 
