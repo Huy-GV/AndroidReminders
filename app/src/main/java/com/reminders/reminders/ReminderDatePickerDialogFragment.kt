@@ -1,4 +1,4 @@
-package com.reminders.misc
+package com.reminders.reminders
 
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.reminders.AppViewModel
 import com.reminders.R
 import java.time.LocalDate
 
-class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment() {
+class ReminderDatePickerDialogFragment(private val viewModel: AppViewModel) : DialogFragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(

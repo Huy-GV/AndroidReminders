@@ -19,19 +19,16 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
-import com.reminders.misc.DatePickerFragment
-import java.time.LocalDate
 import java.util.*
 
 
 class CreateUpdateReminderFragment : Fragment() {
     //TODO: create a superclass fragment?
     private var topicId: Int? = null
-    private lateinit var action: Action
     private var reminder: Reminder? = null
+    private lateinit var action: Action
 
     private lateinit var priorities: Array<String>
-
     private lateinit var contentField: TextInputEditText
     private lateinit var deadlineField: TextInputEditText
     private lateinit var priorityField: AutoCompleteTextView
@@ -77,9 +74,8 @@ class CreateUpdateReminderFragment : Fragment() {
         priorityField.hint = resources.getString(R.string.priority_hint)
 
         deadlineField.setOnClickListener {
-            Log.d("huy", "deadline clicked")
-            DatePickerFragment(appViewModel)
-                .show(parentFragmentManager, DatePickerFragment.TAG)
+            ReminderDatePickerDialogFragment(appViewModel)
+                .show(parentFragmentManager, ReminderDatePickerDialogFragment.TAG)
         }
 
         appViewModel.deadlineString.observe(viewLifecycleOwner) {

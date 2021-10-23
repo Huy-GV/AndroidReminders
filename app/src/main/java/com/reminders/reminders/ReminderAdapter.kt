@@ -1,6 +1,6 @@
 package com.reminders.reminders
 
-import android.app.Activity
+
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +8,15 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
-
+import java.time.LocalDate
 
 
 class ReminderAdapter(
@@ -80,6 +77,9 @@ class ReminderAdapter(
                     R.string.deadline_info,
                     reminder.deadline!!.format(viewModel.dateFormatter)
                 )
+                if (LocalDate.now().isAfter(reminder.deadline)) {
+                    deadline.setTextColor(ContextCompat.getColor(view.context, R.color.red))
+                }
             }
 
 //             more costly because it sets 2 variables?
