@@ -3,7 +3,6 @@ package com.reminders.reminders
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.data.enum.Action
 import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
-
-
-//TODO: backstack doesnt work here
 
 class ReadReminderFragment : Fragment() {
     private var topicId: Int? = null

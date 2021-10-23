@@ -2,8 +2,6 @@ package com.reminders.topics
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,20 +72,14 @@ class CreateUpdateTopicDialogFragment(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateTopic() {
-        var invalidInput = false
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
 
             if (validTopicName()) {
-                Log.d("huy", "VALID INPUT")
                 viewModel.createTopic(nameField.text.toString(), LocalDate.now())
                 dismiss()
             }
         }
-
-    }
-
-    private fun displayError() {
 
     }
 

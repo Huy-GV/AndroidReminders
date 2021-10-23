@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.AppViewModel
@@ -19,7 +17,6 @@ import com.reminders.data.enum.Action
 
 class ReadTopicFragment : Fragment() {
 
-
     private val appViewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
@@ -27,8 +24,6 @@ class ReadTopicFragment : Fragment() {
             database.topicDao()
         )
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
