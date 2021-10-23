@@ -42,7 +42,6 @@ class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment()
 
         view.findViewById<Button>(R.id.cancel_button).setOnClickListener { dismiss() }
 
-
         return view
     }
 

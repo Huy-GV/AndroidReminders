@@ -61,19 +61,19 @@ class CreateUpdateReminderFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_create_update_reminder, container, false)
-        contentField = view.findViewById(R.id.reminder_content_field)
-        deadlineField = view.findViewById(R.id.reminder_deadline_field)
-        priorityField = view.findViewById(R.id.reminder_priority_field)
-        positiveButton = view.findViewById(R.id.positive_reminder_button)
-        view.findViewById<Button>(R.id.cancel_reminder_button).setOnClickListener {
-            findNavController().navigateUp()
+
+        view.apply {
+            contentField = findViewById(R.id.reminder_content_field)
+            deadlineField = findViewById(R.id.reminder_deadline_field)
+            priorityField = findViewById(R.id.reminder_priority_field)
+            positiveButton = findViewById(R.id.positive_reminder_button)
+            findViewById<Button>(R.id.cancel_reminder_button).setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
 
-
-
         priorities = resources.getStringArray(R.array.priorities)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities)
-        priorityField.setAdapter(arrayAdapter)
+        priorityField.setAdapter(ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities))
         priorityField.hint = resources.getString(R.string.priority_hint)
 
         deadlineField.setOnClickListener {
@@ -119,10 +119,8 @@ class CreateUpdateReminderFragment : Fragment() {
         appViewModel.clearDeadlineString()
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
-
             appViewModel.createReminder(
                 content = contentField.text.toString(),
-                rawDeadline = appViewModel.deadlineString.value!!,
                 priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = topicId!!
             )

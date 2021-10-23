@@ -49,7 +49,6 @@ class AppViewModel(
         }
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun createTopic(name: String, creationDate: LocalDate) {
         viewModelScope.launch {
@@ -62,14 +61,11 @@ class AppViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createReminder(content: String, rawDeadline: String, priority: Int, topicId: Int) {
-        var deadline: LocalDate? = null
-        if (rawDeadline.isNotEmpty())
-            deadline = LocalDate.parse(rawDeadline, dateFormatter)
+    fun createReminder(content: String, priority: Int, topicId: Int) {
         viewModelScope.launch {
             reminderDao.create(Reminder(
                 content = content,
-                deadline = deadline,
+                deadline = parseDeadline(),
                 priority = priority,
                 topicId = topicId
             ))

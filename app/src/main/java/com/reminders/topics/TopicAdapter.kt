@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter
 
 
 class TopicAdapter(
-    private val dateFormatter: DateTimeFormatter,
+    private val dateFormatter: DateTimeFormatter
     ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     inner class TopicViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

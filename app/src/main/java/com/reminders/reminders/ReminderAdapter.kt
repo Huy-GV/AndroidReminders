@@ -76,8 +76,15 @@ class ReminderAdapter(
             if (reminder.deadline == null ) {
                 deadline.text =  ""
             } else {
-                deadline.text = reminder.deadline!!.format(viewModel.dateFormatter)
+                deadline.text = view.resources.getString(
+                    R.string.deadline_info,
+                    reminder.deadline!!.format(viewModel.dateFormatter)
+                )
             }
+
+//             more costly because it sets 2 variables?
+//            viewModel.setDeadlineString(reminder.deadline)
+//            deadline.text = viewModel.deadlineString.value
 
             priority.text = reminder.priority.toString()
         }
