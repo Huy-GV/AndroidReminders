@@ -37,6 +37,9 @@
             app:exitAnim="@anim/leave_to_top"
             app:popEnterAnim="@anim/enter_from_top"
             app:popExitAnim="@anim/leave_to_bottom" />
+        <argument
+            android:name="topic_color"
+            app:argType="integer" />
     </fragment>
 
     <fragment

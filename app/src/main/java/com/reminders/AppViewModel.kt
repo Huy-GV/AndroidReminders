@@ -50,9 +50,9 @@ class AppViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createTopic(name: String, creationDate: LocalDate) {
+    fun createTopic(name: String, creationDate: LocalDate, color: Int) {
         viewModelScope.launch {
-            topicDao.create(Topic(name = name, creationDate = creationDate))
+            topicDao.create(Topic(name = name, creationDate = creationDate, color = color))
         }
     }
 

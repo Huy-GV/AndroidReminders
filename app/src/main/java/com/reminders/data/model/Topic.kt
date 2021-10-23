@@ -13,5 +13,7 @@ data class Topic (
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "date")
-    val creationDate: LocalDate
+    val creationDate: LocalDate,
+    @ColumnInfo(name = "color")
+    val color: Int
 )

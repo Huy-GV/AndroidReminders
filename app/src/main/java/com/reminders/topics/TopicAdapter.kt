@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.reminders.R
+import com.reminders.data.enum.ColorSet
 import com.reminders.data.model.Topic
 import java.time.format.DateTimeFormatter
 
@@ -48,13 +50,16 @@ class TopicAdapter(
         val topic = topics[position]
         holder.apply {
             name.text = topic.name
+            name.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
             creationDate.text = view.resources.getString(
                     R.string.topic_creation_date,
                     topic.creationDate.format(dateFormatter)
                 )
+            creationDate.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
+            card.setCardBackgroundColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].colorId))
             card.setOnClickListener {
                 val action = ReadTopicFragmentDirections
-                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name)
+                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name, topic.color)
                 view.findNavController().navigate(action)
             }
         }

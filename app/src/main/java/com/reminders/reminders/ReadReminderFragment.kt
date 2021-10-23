@@ -14,11 +14,13 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.data.enum.Action
+import com.reminders.data.enum.ColorSet
 import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
 
 class ReadReminderFragment : Fragment() {
     private var topicId: Int? = null
+    private var topicColor: Int? = null
     private var topicName: String? = null
 
     private val appViewModel: AppViewModel by activityViewModels {
@@ -34,6 +36,7 @@ class ReadReminderFragment : Fragment() {
         arguments?.let {
             topicId = it.getInt(TOPIC_ID)
             topicName = it.getString(TOPIC_NAME)
+            topicColor = it.getInt(TOPIC_COLOR)
         }
         setHasOptionsMenu(true)
     }
@@ -77,7 +80,7 @@ class ReadReminderFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
-
+        view.setBackgroundResource(ColorSet.data[topicColor!!].colorId)
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
         val reminderAdapter = ReminderAdapter(
             appViewModel,
@@ -113,5 +116,6 @@ class ReadReminderFragment : Fragment() {
     companion object {
         const val TOPIC_ID = "topic_id"
         const val TOPIC_NAME = "topic_name"
+        const val TOPIC_COLOR = "topic_color"
     }
 }
