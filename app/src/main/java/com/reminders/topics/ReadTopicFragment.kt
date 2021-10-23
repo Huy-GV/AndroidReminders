@@ -33,13 +33,15 @@ class ReadTopicFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
-        val topicAdapter = TopicAdapter(appViewModel.dateFormatter)
+        val topicAdapter = TopicAdapter(appViewModel.dateFormatter, appViewModel, viewLifecycleOwner)
 
         appViewModel
             .getTopics()
             .observe(this.viewLifecycleOwner) {
                 topics -> topicAdapter.updateData(topics)
             }
+
+
 
         recycler.apply {
             adapter = topicAdapter

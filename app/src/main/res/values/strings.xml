@@ -9,6 +9,7 @@
     <string name="add_reminder_label">Add reminder to&#160;</string>
     <string name="delete_topic_warning">Are you sure you want to delete %1s</string>
     <string name="topic_creation_date">Created on %1s</string>
+    <string name="reminder_count">%1s reminders</string>
     <string name="update_reminder_label">Update reminder</string>
     <string name="content_hint">Content</string>
     <string name="delete_topic_label">Delete topic</string>

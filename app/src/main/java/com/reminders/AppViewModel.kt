@@ -29,6 +29,10 @@ class AppViewModel(
         return topicDao.getAll().asLiveData()
     }
 
+    fun getReminderCount(topicId: Int) : LiveData<Int> {
+        return topicDao.getReminderCount(topicId).asLiveData()
+    }
+
     fun clearDeadlineString() {
         _deadlineString.value = ""
     }

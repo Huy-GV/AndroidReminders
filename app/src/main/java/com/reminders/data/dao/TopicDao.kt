@@ -20,4 +20,7 @@ interface TopicDao {
     fun getAll(): Flow<List<Topic>>
     @Query("SELECT * from topic WHERE id = :id")
     fun getTopic(id: Int): Flow<Topic>
+
+    @Query("SELECT COUNT(*) FROM reminder WHERE reminder.topicId = :id")
+    fun getReminderCount(id: Int): Flow<Int>
 }
