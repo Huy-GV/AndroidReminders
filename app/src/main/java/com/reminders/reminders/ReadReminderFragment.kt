@@ -84,7 +84,6 @@ class ReadReminderFragment : Fragment() {
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
         val reminderAdapter = ReminderAdapter(
             appViewModel,
-            findNavController(),
             resources.getString(R.string.update_reminder_label)
         )
 

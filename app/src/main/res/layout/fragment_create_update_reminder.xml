@@ -37,16 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:hint="@string/deadline_hint"
-        android:clickable="true"
-        android:focusable="false">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="false"
+            android:hint="@string/deadline_hint"
             android:id="@+id/reminder_deadline_field"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +61,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/reminder_priority_field"
             android:inputType="none"
-            android:hint="@string/priority_hint"/>
+            android:hint=""/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

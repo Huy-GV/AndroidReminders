@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -23,16 +24,15 @@ import com.reminders.data.model.Reminder
 
 class ReminderAdapter(
     private val viewModel: AppViewModel,
-    private val navController: NavController,
     private val updateReminderLabel: String
 ) : RecyclerView.Adapter<ReminderAdapter.TopicViewHolder>() {
 
-    inner class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val checkButton: RadioButton = itemView.findViewById(R.id.reminder_check)
-        val content: TextView = itemView.findViewById(R.id.reminder_content)
-        val card: MaterialCardView = itemView.findViewById(R.id.reminder_card)
-        val deadline: TextView = itemView.findViewById(R.id.reminder_deadline)
-        val priority: TextView = itemView.findViewById(R.id.reminder_priority)
+    inner class TopicViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val checkButton: RadioButton = view.findViewById(R.id.reminder_check)
+        val content: TextView = view.findViewById(R.id.reminder_content)
+        val card: MaterialCardView = view.findViewById(R.id.reminder_card)
+        val deadline: TextView = view.findViewById(R.id.reminder_deadline)
+        val priority: TextView = view.findViewById(R.id.reminder_priority)
     }
 
     private val reminders = mutableListOf<Reminder>()
@@ -63,7 +63,7 @@ class ReminderAdapter(
                 }
             }
             card.setOnClickListener {
-                navController
+                view.findNavController()
                     .navigate(ReadReminderFragmentDirections
                     .actionReadReminderFragmentToCreateUpdateReminderFragment(
                         reminder.topicId,

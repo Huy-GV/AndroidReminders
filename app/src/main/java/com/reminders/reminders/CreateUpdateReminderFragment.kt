@@ -75,7 +75,7 @@ class CreateUpdateReminderFragment : Fragment() {
         priorities = resources.getStringArray(R.array.priorities)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities)
         priorityField.setAdapter(arrayAdapter)
-
+        priorityField.hint = resources.getString(R.string.priority_hint)
 
         deadlineField.setOnClickListener {
             Log.d("huy", "deadline clicked")
@@ -102,13 +102,15 @@ class CreateUpdateReminderFragment : Fragment() {
             deadlineField.setText(reminder.deadline!!.format(appViewModel.dateFormatter))
         }
 
-        priorityField.setText(priorities[reminder.priority])
+        priorityField.hint = priorities[reminder.priority]
 
         //TODO: priority select no working
         positiveButton.setOnClickListener {
+            var newDeadline: LocalDate? =  null
+            if (appViewModel.dateString.isNotEmpty()) newDeadline = LocalDate.parse(appViewModel.dateString, appViewModel.dateFormatter)
             reminder.apply {
                 content = contentField.text.toString()
-                deadline = LocalDate.parse(appViewModel.dateString, appViewModel.dateFormatter)
+                deadline = newDeadline
                 priority = getPriorityLevel(priorityField.text.toString())
             }
             appViewModel.dateString = ""
