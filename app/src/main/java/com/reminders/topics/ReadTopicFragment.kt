@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -47,7 +48,7 @@ class ReadTopicFragment : Fragment() {
 
         recycler.apply {
             adapter = topicAdapter
-            layoutManager = LinearLayoutManager(this@ReadTopicFragment.context)
+            layoutManager = GridLayoutManager(this@ReadTopicFragment.context, 2)
         }
 
         view.findViewById<FloatingActionButton>(R.id.create_topic_button).setOnClickListener {

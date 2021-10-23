@@ -6,8 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="9dp"
     android:padding="10dp"
+    android:clickable="true"
     android:id="@+id/reminder_card"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="12dp"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,9 +34,7 @@
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/reminder_check"
-            android:text="CONTENT"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            style="@style/reminder_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
