@@ -3,21 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".topics.CreateUpdateTopicDialogFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:hint="@string/topic_name_hint">
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_margin="20dp"
+        android:hint="@string/topic_name_hint"
+        app:counterEnabled="true"
+        app:counterMaxLength="10">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/topic_name_field"
             android:layout_width="300dp"
-            android:layout_height="match_parent" />
+            android:layout_height="55dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

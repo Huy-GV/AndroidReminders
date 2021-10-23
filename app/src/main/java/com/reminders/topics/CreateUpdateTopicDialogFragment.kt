@@ -2,6 +2,7 @@ package com.reminders.topics
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,22 +54,32 @@ class CreateUpdateTopicDialogFragment(
     private fun setUpdateTopic() {
         positiveButton.text = resources.getString(R.string.save_changes)
         positiveButton.setOnClickListener {
-            if (nameField.text.toString().isEmpty()) {
-                displayError()
-            } else {
+            if (validTopicName()) {
                 viewModel.updateTopic(topicId, nameField.text.toString())
                 dismiss()
             }
         }
     }
 
+    fun validTopicName() : Boolean {
+        if (nameField.text.toString().isEmpty()) {
+            nameField.error = resources.getString(R.string.empty_topic_name_error)
+            return false
+        } else if (nameField.text!!.length > 10) {
+            nameField.error = resources.getString(R.string.topic_name_max_error)
+            return false
+        }
+        return true
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateTopic() {
+        var invalidInput = false
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
-            if (nameField.text.toString().isEmpty()) {
-                displayError()
-            } else {
+
+            if (validTopicName()) {
+                Log.d("huy", "VALID INPUT")
                 viewModel.createTopic(nameField.text.toString(), LocalDate.now())
                 dismiss()
             }
@@ -77,7 +88,7 @@ class CreateUpdateTopicDialogFragment(
     }
 
     private fun displayError() {
-        nameField.error = resources.getString(R.string.empty_topic_name_error)
+
     }
 
     companion object {
