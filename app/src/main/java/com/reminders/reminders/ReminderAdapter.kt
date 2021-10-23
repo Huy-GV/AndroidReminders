@@ -86,13 +86,25 @@ class ReminderAdapter(
 //            viewModel.setDeadlineString(reminder.deadline)
 //            deadline.text = viewModel.deadlineString.value
 
-            priority.text = reminder.priority.toString()
+            val priorities = view.resources.getStringArray(R.array.priorities)
+            priority.text = view.resources.getString(
+                R.string.priority_info,
+                priorities[reminder.priority]
+            )
+            setPriorityColor(view, priority, reminder.priority, priorities.size)
         }
     }
+
+    private fun setPriorityColor(view: View, priorityView: TextView, priority: Int, maxPriority: Int) {
+        when (priority) {
+            maxPriority - 1 -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.red))
+            maxPriority - 2 -> priorityView.setTextColor(ContextCompat.getColor(view.context, R.color.orange))
+        }
+    }
+
 
     override fun getItemCount(): Int {
         return reminders.size
     }
-
 
 }

@@ -13,6 +13,7 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.data.enum.Action
 import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
@@ -98,7 +99,7 @@ class ReadReminderFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@ReadReminderFragment.context)
         }
 
-        view.findViewById<Button>(R.id.create_reminder_button).setOnClickListener {
+        view.findViewById<FloatingActionButton>(R.id.create_reminder_button).setOnClickListener {
             findNavController()
                 .navigate(ReadReminderFragmentDirections
                     .actionReadReminderFragmentToCreateUpdateReminderFragment(

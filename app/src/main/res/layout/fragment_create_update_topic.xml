@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp"
+    android:padding="50dp"
     tools:context=".topics.CreateUpdateTopicDialogFragment">
 
     <com.google.android.material.textfield.TextInputLayout

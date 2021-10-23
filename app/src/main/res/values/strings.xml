@@ -22,4 +22,5 @@
     </string-array>
     <string name="topic_name_hint">Name</string>
     <string name="deadline_info">Due on %1s</string>
+    <string name="priority_info">Priority: %1s</string>
 </resources>
