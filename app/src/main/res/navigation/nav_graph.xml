@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_read_topic" >
         <action
             android:id="@+id/action_readTopicFragment_to_readReminderFragment"
-            app:destination="@id/readReminderFragment" />
+            app:destination="@id/readReminderFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/leave_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/leave_to_right" />
     </fragment>
 
     <fragment
@@ -28,7 +32,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_readReminderFragment_to_createUpdateReminderFragment"
-            app:destination="@id/createUpdateReminderFragment" />
+            app:destination="@id/createUpdateReminderFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/leave_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/leave_to_right" />
     </fragment>
 
     <fragment
