@@ -2,7 +2,6 @@ package com.reminders.misc
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.reminders.AppViewModel
 import com.reminders.R
+import java.time.LocalDate
 
 class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment() {
 
@@ -34,9 +34,9 @@ class DatePickerFragment(private val viewModel: AppViewModel) : DialogFragment()
 
         view.findViewById<Button>(R.id.confirm_date_button).setOnClickListener {
             if (date != 0 && month != 0 && year != 0) {
-                viewModel.dateString = "${date}/${month}/${year}"
+                viewModel.setDeadlineString(LocalDate.of(year, month + 1, date))
             }
-            Log.d("huy", viewModel.dateString)
+
             dismiss()
         }
 

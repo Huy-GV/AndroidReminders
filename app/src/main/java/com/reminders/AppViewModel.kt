@@ -19,7 +19,8 @@ class AppViewModel(
 
 ) : ViewModel() {
 
-    var dateString: String = ""
+    private var _deadlineString: MutableLiveData<String> = MutableLiveData("")
+    val deadlineString: LiveData<String> get() = _deadlineString
 
     @RequiresApi(Build.VERSION_CODES.O)
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
@@ -27,6 +28,27 @@ class AppViewModel(
     fun getTopics() : LiveData<List<Topic>> {
         return topicDao.getAll().asLiveData()
     }
+
+    fun clearDeadlineString() {
+        _deadlineString.value = ""
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parseDeadline() : LocalDate? {
+        if (_deadlineString.value.isNullOrEmpty()) {
+            return null
+        }
+        return LocalDate.parse(_deadlineString.value, dateFormatter)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setDeadlineString(date: LocalDate?) {
+        if (date == null) clearDeadlineString()
+        else  {
+            _deadlineString.value = date.format(dateFormatter)
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createTopic(name: String, creationDate: LocalDate) {

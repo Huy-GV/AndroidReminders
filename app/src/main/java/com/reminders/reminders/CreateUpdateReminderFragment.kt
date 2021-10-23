@@ -15,7 +15,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
-import com.reminders.MainActivity
 import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
@@ -83,6 +82,10 @@ class CreateUpdateReminderFragment : Fragment() {
                 .show(parentFragmentManager, DatePickerFragment.TAG)
         }
 
+        appViewModel.deadlineString.observe(viewLifecycleOwner) {
+            deadlineField.setText(it)
+        }
+
         when (action ){
             Action.CREATE -> setCreateAction()
             Action.UPDATE -> setUpdateAction(reminder!!)
@@ -96,24 +99,16 @@ class CreateUpdateReminderFragment : Fragment() {
 
         positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
-        if (reminder.deadline == null) {
-            deadlineField.setText("")
-        } else {
-            deadlineField.setText(reminder.deadline!!.format(appViewModel.dateFormatter))
-        }
-
+        appViewModel.setDeadlineString(reminder.deadline)
         priorityField.hint = priorities[reminder.priority]
 
-        //TODO: priority select no working
         positiveButton.setOnClickListener {
-            var newDeadline: LocalDate? =  null
-            if (appViewModel.dateString.isNotEmpty()) newDeadline = LocalDate.parse(appViewModel.dateString, appViewModel.dateFormatter)
             reminder.apply {
                 content = contentField.text.toString()
-                deadline = newDeadline
+                deadline = appViewModel.parseDeadline()
                 priority = getPriorityLevel(priorityField.text.toString())
             }
-            appViewModel.dateString = ""
+            appViewModel.clearDeadlineString()
             appViewModel.updateReminder(reminder)
             findNavController().navigateUp()
         }
@@ -121,17 +116,17 @@ class CreateUpdateReminderFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateAction() {
-
+        appViewModel.clearDeadlineString()
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
 
             appViewModel.createReminder(
                 content = contentField.text.toString(),
-                rawDeadline = appViewModel.dateString,
+                rawDeadline = appViewModel.deadlineString.value!!,
                 priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = topicId!!
             )
-            appViewModel.dateString = ""
+            appViewModel.clearDeadlineString()
             findNavController().navigateUp()
         }
     }
