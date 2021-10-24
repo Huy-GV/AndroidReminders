@@ -5,10 +5,10 @@ import com.reminders.data.model.ColorBlock
 
 object ColorSet{
     val data: List<ColorBlock> = listOf(
-        ColorBlock(R.color.black, "red", R.color.white),
-        ColorBlock(R.color.red, "red", R.color.white),
-        ColorBlock(R.color.blue, "red", R.color.white),
-        ColorBlock(R.color.purple_500, "red", R.color.white),
-        ColorBlock(R.color.white, "red", R.color.black),
+        ColorBlock(R.color.black, "black", R.color.white),
+        ColorBlock(R.color.orange, "orange", R.color.white),
+        ColorBlock(R.color.dark_blue, "dark_blue", R.color.white),
+        ColorBlock(R.color.yellow, "yellow", R.color.black),
+        ColorBlock(R.color.white, "white", R.color.black),
     )
 }
