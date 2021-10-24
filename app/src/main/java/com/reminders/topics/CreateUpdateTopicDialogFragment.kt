@@ -10,11 +10,13 @@ import android.widget.Button
 import android.widget.SeekBar
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.data.enum.Action
 import com.reminders.data.enum.ColorSet
+import com.reminders.reminders.CreateUpdateReminderFragmentArgs
 import java.time.LocalDate
 
 

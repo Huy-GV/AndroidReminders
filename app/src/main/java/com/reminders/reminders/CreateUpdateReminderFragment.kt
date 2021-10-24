@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
 import com.reminders.R
@@ -22,8 +23,9 @@ import java.util.*
 
 
 class CreateUpdateReminderFragment : Fragment() {
-    //TODO: create a superclass fragment?
-    private var topicId: Int? = null
+
+    private val args: CreateUpdateReminderFragmentArgs by navArgs()
+    private var topicId: Int = 0
     private var reminder: Reminder? = null
     private lateinit var action: Action
 
@@ -40,14 +42,6 @@ class CreateUpdateReminderFragment : Fragment() {
             database.topicDao()
         )
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            topicId = it.getInt(TOPIC_ID)
-            action = it.getSerializable(ACTION) as Action
-            reminder = it.getParcelable(REMINDER)
-        }
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -56,6 +50,7 @@ class CreateUpdateReminderFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+        initializeArguments()
         val view = inflater.inflate(R.layout.fragment_create_update_reminder, container, false)
 
         view.apply {
@@ -89,6 +84,12 @@ class CreateUpdateReminderFragment : Fragment() {
         return view
     }
 
+    private fun initializeArguments() {
+        topicId = args.topicId
+        action = args.actionType
+        reminder = args.reminder
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setUpdateAction(reminder: Reminder) {
 
@@ -117,7 +118,7 @@ class CreateUpdateReminderFragment : Fragment() {
             appViewModel.createReminder(
                 content = contentField.text.toString(),
                 priority = getPriorityLevel(priorityField.text.toString()),
-                topicId = topicId!!
+                topicId = topicId
             )
             appViewModel.clearDeadlineString()
             findNavController().navigateUp()
@@ -130,11 +131,5 @@ class CreateUpdateReminderFragment : Fragment() {
             if (priorityString == priority) return@getPriorityLevel index
         }
         return 1
-    }
-
-    companion object {
-        const val TOPIC_ID = "topic_id"
-        const val REMINDER = "reminder"
-        const val ACTION = "action_type"
     }
 }

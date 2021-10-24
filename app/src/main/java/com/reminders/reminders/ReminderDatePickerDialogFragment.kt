@@ -45,9 +45,7 @@ class ReminderDatePickerDialogFragment(private val viewModel: AppViewModel) : Di
         return view
     }
 
-
     companion object {
         const val TAG = "DatePickerDialog"
     }
-
 }

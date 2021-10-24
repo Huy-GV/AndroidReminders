@@ -12,6 +12,7 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.data.enum.Action
 import com.reminders.data.enum.ColorSet
@@ -19,9 +20,10 @@ import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
 
 class ReadReminderFragment : Fragment() {
-    private var topicId: Int? = null
+    private var topicId: Int = 0
     private var topicColor: Int = 0
-    private var topicName: String? = null
+    private var topicName: String = ""
+    private val args: ReadReminderFragmentArgs by navArgs()
 
     private val appViewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
@@ -33,11 +35,6 @@ class ReadReminderFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            topicId = it.getInt(TOPIC_ID)
-            topicName = it.getString(TOPIC_NAME)
-            topicColor = it.getInt(TOPIC_COLOR)
-        }
         setHasOptionsMenu(true)
     }
 
@@ -64,8 +61,8 @@ class ReadReminderFragment : Fragment() {
                 CreateUpdateTopicDialogFragment(
                     Action.UPDATE,
                     appViewModel,
-                    topicId!!,
-                    topicName!!,
+                    topicId,
+                    topicName,
                     topicColor
                 )
                     .show(
@@ -77,8 +74,16 @@ class ReadReminderFragment : Fragment() {
         return true
     }
 
+    private fun initializeArguments() {
+        topicId = args.topicId
+        topicName =  args.topicName
+        topicColor =  args.topicColor
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        initializeArguments()
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
@@ -90,7 +95,7 @@ class ReadReminderFragment : Fragment() {
         )
 
         appViewModel
-            .getReminders(topicId!!)
+            .getReminders(topicId)
             .observe(this.viewLifecycleOwner) {
                     reminders -> reminderAdapter.updateData(reminders)
             }
@@ -108,20 +113,12 @@ class ReadReminderFragment : Fragment() {
             findNavController()
                 .navigate(ReadReminderFragmentDirections
                     .actionReadReminderFragmentToCreateUpdateReminderFragment(
-                        topicId!!,
+                        topicId,
                         Action.CREATE,
                         null,
                         resources.getString(R.string.add_reminder_label) + topicName
                     ))
         }
-
         return view
-    }
-
-
-    companion object {
-        const val TOPIC_ID = "topic_id"
-        const val TOPIC_NAME = "topic_name"
-        const val TOPIC_COLOR = "topic_color"
     }
 }
