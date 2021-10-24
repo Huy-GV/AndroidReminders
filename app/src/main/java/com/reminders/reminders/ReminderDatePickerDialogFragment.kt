@@ -34,7 +34,7 @@ class ReminderDatePickerDialogFragment(private val viewModel: AppViewModel) : Di
 
         view.findViewById<Button>(R.id.confirm_date_button).setOnClickListener {
             if (date != 0 && month != 0 && year != 0) {
-                viewModel.setDeadlineString(LocalDate.of(year, month + 1, date))
+                viewModel.updateDeadlineString(LocalDate.of(year, month + 1, date))
             }
 
             dismiss()

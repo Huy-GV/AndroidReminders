@@ -82,7 +82,6 @@ class ReminderAdapter(
                 }
             }
 
-//             more costly because it sets 2 variables?
 //            viewModel.setDeadlineString(reminder.deadline)
 //            deadline.text = viewModel.deadlineString.value
 

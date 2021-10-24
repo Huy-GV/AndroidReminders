@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.AppViewModel
 import com.reminders.R
+
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
-
 
 class ReadTopicFragment : Fragment() {
 
@@ -30,18 +30,18 @@ class ReadTopicFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
         val topicAdapter = TopicAdapter(appViewModel.dateFormatter, appViewModel, viewLifecycleOwner)
-
+        appViewModel.clearTopicColor()
         appViewModel
             .getTopics()
             .observe(this.viewLifecycleOwner) {
                 topics -> topicAdapter.updateData(topics)
             }
-
-
 
         recycler.apply {
             adapter = topicAdapter

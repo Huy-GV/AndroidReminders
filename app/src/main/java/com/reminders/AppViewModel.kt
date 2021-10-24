@@ -3,17 +3,13 @@
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
-import androidx.room.Room
 import com.reminders.data.dao.*
-import com.reminders.data.database.AppDatabase
 import com.reminders.data.model.*
 import kotlinx.coroutines.launch
-import java.text.DateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 
-class AppViewModel(
+  class AppViewModel(
     private val topicDao: TopicDao,
     private val reminderDao: ReminderDao
 
@@ -21,6 +17,16 @@ class AppViewModel(
 
     private var _deadlineString: MutableLiveData<String> = MutableLiveData("")
     val deadlineString: LiveData<String> get() = _deadlineString
+
+    private var _topicColor: MutableLiveData<Int> = MutableLiveData(0)
+    val topicColor: LiveData<Int> get() = _topicColor
+
+
+    fun updateTopicColor(newId: Int) {
+        _topicColor.value = newId
+    }
+
+    fun clearTopicColor() { _topicColor.value = null }
 
     @RequiresApi(Build.VERSION_CODES.O)
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
@@ -46,7 +52,7 @@ class AppViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun setDeadlineString(date: LocalDate?) {
+    fun updateDeadlineString(date: LocalDate?) {
         if (date == null) clearDeadlineString()
         else  {
             _deadlineString.value = date.format(dateFormatter)
@@ -88,9 +94,9 @@ class AppViewModel(
         }
     }
 
-    fun updateTopic(topicId: Int, name: String) {
+    fun updateTopic(topicId: Int, name: String, color: Int) {
         viewModelScope.launch {
-            topicDao.update(topicId, name)
+            topicDao.update(topicId, name, color)
         }
     }
 

@@ -39,8 +39,6 @@ class TopicAdapter(
         notifyDataSetChanged()
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
         val inflatedLayout = LayoutInflater
             .from(parent.context)
@@ -69,6 +67,7 @@ class TopicAdapter(
             }
             card.setCardBackgroundColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].colorId))
             card.setOnClickListener {
+                viewModel.updateTopicColor(topic.color)
                 val action = ReadTopicFragmentDirections
                     .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name, topic.color)
                 view.findNavController().navigate(action)

@@ -2,7 +2,6 @@ package com.reminders.reminders
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,7 +94,7 @@ class CreateUpdateReminderFragment : Fragment() {
 
         positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
-        appViewModel.setDeadlineString(reminder.deadline)
+        appViewModel.updateDeadlineString(reminder.deadline)
         priorityField.hint = priorities[reminder.priority]
 
         positiveButton.setOnClickListener {

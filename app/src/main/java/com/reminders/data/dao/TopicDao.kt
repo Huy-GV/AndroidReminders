@@ -10,8 +10,8 @@ interface TopicDao {
     suspend fun create(topic: Topic)
 //    @Update
 //    suspend fun update(topic: Topic)
-    @Query("UPDATE topic SET name = :name WHERE id = :topicId")
-    suspend fun update(topicId: Int, name: String)
+    @Query("UPDATE topic SET name = :name, color = :color WHERE id = :topicId")
+    suspend fun update(topicId: Int, name: String, color: Int)
 //    @Delete
 //    suspend fun delete(topic: Topic)
     @Query("DELETE FROM topic WHERE id = :topicId")

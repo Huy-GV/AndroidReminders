@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
@@ -23,7 +22,8 @@ class CreateUpdateTopicDialogFragment(
     private val action: Action,
     private val viewModel: AppViewModel,
     private val topicId: Int = 0,
-    private val topicName: String = ""
+    private val topicName: String = "",
+    private val topicColor: Int = 0
 ) : DialogFragment() {
 
     private lateinit var nameField: TextInputEditText
@@ -55,7 +55,8 @@ class CreateUpdateTopicDialogFragment(
             Action.UPDATE -> setUpdateTopic()
         }
 
-
+        colorBlock.setBackgroundResource(colorSet[topicColor].colorId)
+        seekBar.progress = topicColor
         seekBar.max = colorSet.size - 1
         seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -74,11 +75,10 @@ class CreateUpdateTopicDialogFragment(
 
     private fun setUpdateTopic() {
         positiveButton.text = resources.getString(R.string.save_changes)
-
         positiveButton.setOnClickListener {
             if (validTopicName()) {
-                viewModel.updateTopic(topicId, nameField.text.toString())
-
+                viewModel.updateTopic(topicId, nameField.text.toString(), seekBar.progress)
+                viewModel.updateTopicColor(seekBar.progress)
                 dismiss()
             }
         }
@@ -88,9 +88,12 @@ class CreateUpdateTopicDialogFragment(
     private fun setCreateTopic() {
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
-
             if (validTopicName()) {
-                viewModel.createTopic(nameField.text.toString(), LocalDate.now(), seekBar.progress)
+                viewModel.createTopic(
+                    nameField.text.toString(),
+                    LocalDate.now(),
+                    seekBar.progress
+                )
                 dismiss()
             }
         }

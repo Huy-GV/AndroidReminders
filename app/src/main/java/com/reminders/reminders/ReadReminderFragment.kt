@@ -20,7 +20,7 @@ import com.reminders.topics.DeleteTopicDialogFragment
 
 class ReadReminderFragment : Fragment() {
     private var topicId: Int? = null
-    private var topicColor: Int? = null
+    private var topicColor: Int = 0
     private var topicName: String? = null
 
     private val appViewModel: AppViewModel by activityViewModels {
@@ -65,7 +65,8 @@ class ReadReminderFragment : Fragment() {
                     Action.UPDATE,
                     appViewModel,
                     topicId!!,
-                    topicName!!
+                    topicName!!,
+                    topicColor
                 )
                     .show(
                         parentFragmentManager,
@@ -80,7 +81,8 @@ class ReadReminderFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
-        view.setBackgroundResource(ColorSet.data[topicColor!!].colorId)
+
+        view.setBackgroundResource(ColorSet.data[appViewModel.topicColor.value!!].colorId)
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
         val reminderAdapter = ReminderAdapter(
             appViewModel,
@@ -92,6 +94,10 @@ class ReadReminderFragment : Fragment() {
             .observe(this.viewLifecycleOwner) {
                     reminders -> reminderAdapter.updateData(reminders)
             }
+
+        appViewModel.topicColor.observe(this.viewLifecycleOwner) {
+            view.setBackgroundResource(ColorSet.data[appViewModel.topicColor.value!!].colorId)
+        }
 
         recycler.apply {
             adapter = reminderAdapter
