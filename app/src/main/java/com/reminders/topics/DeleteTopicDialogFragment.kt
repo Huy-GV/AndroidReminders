@@ -11,7 +11,7 @@ import com.reminders.R
 
 class DeleteTopicDialogFragment(
     private val topicId: Int,
-    private val appViewModel: AppViewModel,
+    private val viewModel: AppViewModel,
     private val deleteWarning: String
 ) : DialogFragment() {
 
@@ -19,7 +19,7 @@ class DeleteTopicDialogFragment(
         AlertDialog.Builder(requireContext())
             .setMessage(deleteWarning)
             .setPositiveButton(resources.getString(R.string.delete)) { _,_ ->
-                appViewModel.deleteTopic(topicId)
+                viewModel.deleteTopic(topicId)
                 findNavController().navigateUp()
                 dismiss()
             }

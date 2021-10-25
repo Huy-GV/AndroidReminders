@@ -17,7 +17,7 @@ import com.reminders.data.enum.Action
 
 class ReadTopicFragment : Fragment() {
 
-    private val appViewModel: AppViewModel by activityViewModels {
+    private val viewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
             database.reminderDao(),
@@ -35,9 +35,9 @@ class ReadTopicFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
 
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
-        val topicAdapter = TopicAdapter(appViewModel.dateFormatter, appViewModel, viewLifecycleOwner)
-        appViewModel.clearTopicColor()
-        appViewModel
+        val topicAdapter = TopicAdapter(viewModel.dateFormatter, viewModel, viewLifecycleOwner)
+        viewModel.clearTopicColor()
+        viewModel
             .getTopics()
             .observe(this.viewLifecycleOwner) {
                 topics -> topicAdapter.updateData(topics)
@@ -51,7 +51,7 @@ class ReadTopicFragment : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.create_topic_button).setOnClickListener {
             CreateUpdateTopicDialogFragment(
                 Action.CREATE,
-                appViewModel,
+                viewModel,
             )
                 .show(
                     parentFragmentManager,

@@ -34,6 +34,7 @@
             android:id="@+id/reminder_content"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="5sp"
             android:layout_alignStart="@id/reminder_check"
             style="@style/reminder_content"
             tools:text="reminder content here"

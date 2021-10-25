@@ -25,7 +25,7 @@ class ReadReminderFragment : Fragment() {
     private var topicName: String = ""
     private val args: ReadReminderFragmentArgs by navArgs()
 
-    private val appViewModel: AppViewModel by activityViewModels {
+    private val viewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
             database.reminderDao(),
@@ -47,8 +47,8 @@ class ReadReminderFragment : Fragment() {
         when (item.itemId) {
             R.id.delete_topic -> {
                 DeleteTopicDialogFragment(
-                    topicId!!,
-                    appViewModel,
+                    topicId,
+                    viewModel,
                     resources.getString(R.string.delete_topic_warning, topicName)
                 )
                     .show(
@@ -57,10 +57,10 @@ class ReadReminderFragment : Fragment() {
                     )
             }
             R.id.edit_topic -> {
-                appViewModel.updateTopicColor(topicColor)
+                viewModel.updateTopicColor(topicColor)
                 CreateUpdateTopicDialogFragment(
                     Action.UPDATE,
-                    appViewModel,
+                    viewModel,
                     topicId,
                     topicName,
                 )
@@ -86,21 +86,22 @@ class ReadReminderFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
-        view.setBackgroundResource(ColorSet.data[appViewModel.topicColor.value!!].colorId)
+        view.setBackgroundResource(ColorSet.data[topicColor].colorId)
         val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
         val reminderAdapter = ReminderAdapter(
-            appViewModel,
+            viewModel,
             resources.getString(R.string.update_reminder_label)
         )
 
-        appViewModel
+        viewModel
             .getReminders(topicId)
             .observe(this.viewLifecycleOwner) {
                     reminders -> reminderAdapter.updateData(reminders)
             }
 
-        appViewModel.topicColor.observe(this.viewLifecycleOwner) {
-            view.setBackgroundResource(ColorSet.data[appViewModel.topicColor.value!!].colorId)
+        viewModel.topicColor.observe(this.viewLifecycleOwner) {
+            topicColor = viewModel.topicColor.value ?: ColorSet.data.lastIndex
+            view.setBackgroundResource(ColorSet.data[topicColor].colorId)
         }
 
         recycler.apply {

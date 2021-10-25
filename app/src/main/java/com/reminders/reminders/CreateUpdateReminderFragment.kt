@@ -35,7 +35,7 @@ class CreateUpdateReminderFragment : Fragment() {
     private lateinit var priorityField: AutoCompleteTextView
     private lateinit var positiveButton: Button
 
-    private val appViewModel: AppViewModel by activityViewModels {
+    private val viewModel: AppViewModel by activityViewModels {
         val database = (activity?.application as MyApplication).database
         AppViewModel.Factory(
             database.reminderDao(),
@@ -68,11 +68,11 @@ class CreateUpdateReminderFragment : Fragment() {
         priorityField.hint = resources.getString(R.string.priority_hint)
 
         deadlineField.setOnClickListener {
-            ReminderDatePickerDialogFragment(appViewModel)
+            ReminderDatePickerDialogFragment(viewModel)
                 .show(parentFragmentManager, ReminderDatePickerDialogFragment.TAG)
         }
 
-        appViewModel.deadlineString.observe(viewLifecycleOwner) {
+        viewModel.deadlineString.observe(viewLifecycleOwner) {
             deadlineField.setText(it)
         }
 
@@ -95,32 +95,32 @@ class CreateUpdateReminderFragment : Fragment() {
 
         positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
-        appViewModel.updateDeadlineString(reminder.deadline)
+        viewModel.updateDeadlineString(reminder.deadline)
         priorityField.hint = priorities[reminder.priority]
 
         positiveButton.setOnClickListener {
             reminder.apply {
                 content = contentField.text.toString()
-                deadline = appViewModel.parseDeadline()
+                deadline = viewModel.parseDeadline()
                 priority = getPriorityLevel(priorityField.text.toString())
             }
-            appViewModel.clearDeadlineString()
-            appViewModel.updateReminder(reminder)
+            viewModel.clearDeadlineString()
+            viewModel.updateReminder(reminder)
             findNavController().navigateUp()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateAction() {
-        appViewModel.clearDeadlineString()
+        viewModel.clearDeadlineString()
         positiveButton.text = resources.getString(R.string.add_new)
         positiveButton.setOnClickListener {
-            appViewModel.createReminder(
+            viewModel.createReminder(
                 content = contentField.text.toString(),
                 priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = topicId
             )
-            appViewModel.clearDeadlineString()
+            viewModel.clearDeadlineString()
             findNavController().navigateUp()
         }
     }

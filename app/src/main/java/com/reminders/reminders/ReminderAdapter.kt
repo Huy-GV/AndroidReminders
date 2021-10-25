@@ -90,7 +90,7 @@ class ReminderAdapter(
                 R.string.priority_info,
                 priorities[reminder.priority]
             )
-            setPriorityColor(view, priority, reminder.priority, priorities.size - 1)
+            setPriorityColor(view, priority, reminder.priority, priorities.lastIndex)
         }
     }
 
