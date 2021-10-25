@@ -57,13 +57,12 @@ class ReadReminderFragment : Fragment() {
                     )
             }
             R.id.edit_topic -> {
-
+                appViewModel.updateTopicColor(topicColor)
                 CreateUpdateTopicDialogFragment(
                     Action.UPDATE,
                     appViewModel,
                     topicId,
                     topicName,
-                    topicColor
                 )
                     .show(
                         parentFragmentManager,

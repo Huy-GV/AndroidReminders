@@ -101,7 +101,6 @@ class ReminderAdapter(
         }
     }
 
-
     override fun getItemCount(): Int {
         return reminders.size
     }

@@ -14,7 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/reminder_check"
             style="@style/reminder_content"
+            tools:text="reminder content here"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -49,13 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/reminder_content"
             android:padding="5dp"
-            android:text="reminder deadline"
+            tools:text="reminder deadline"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.215"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reminder_check"
+            app:layout_constraintTop_toBottomOf="@+id/reminder_content"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -63,13 +64,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="priority"
+            tools:text="priority"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.952"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reminder_content"
             app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

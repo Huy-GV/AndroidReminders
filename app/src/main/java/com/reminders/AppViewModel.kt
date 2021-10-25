@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-  class AppViewModel(
+class AppViewModel(
     private val topicDao: TopicDao,
     private val reminderDao: ReminderDao
 
@@ -31,17 +31,7 @@ import java.time.format.DateTimeFormatter
     @RequiresApi(Build.VERSION_CODES.O)
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
 
-    fun getTopics() : LiveData<List<Topic>> {
-        return topicDao.getAll().asLiveData()
-    }
-
-    fun getReminderCount(topicId: Int) : LiveData<Int> {
-        return topicDao.getReminderCount(topicId).asLiveData()
-    }
-
-    fun clearDeadlineString() {
-        _deadlineString.value = ""
-    }
+    fun clearDeadlineString() { _deadlineString.value = null }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun parseDeadline() : LocalDate? {
@@ -64,6 +54,15 @@ import java.time.format.DateTimeFormatter
         viewModelScope.launch {
             topicDao.create(Topic(name = name, creationDate = creationDate, color = color))
         }
+    }
+
+
+    fun getTopics() : LiveData<List<Topic>> {
+        return topicDao.getAll().asLiveData()
+    }
+
+    fun getReminderCount(topicId: Int) : LiveData<Int> {
+        return topicDao.getReminderCount(topicId).asLiveData()
     }
 
     fun getReminders(topicId: Int) : LiveData<List<Reminder>> {
@@ -109,7 +108,7 @@ import java.time.format.DateTimeFormatter
     class Factory(
         private val reminderDao: ReminderDao,
         private val topicDao: TopicDao
-        ) : ViewModelProvider.Factory {
+    ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")

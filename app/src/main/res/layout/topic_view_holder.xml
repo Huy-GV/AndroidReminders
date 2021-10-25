@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
-    app:contentPadding="20dp"
+    app:contentPadding="10dp"
     app:cardCornerRadius="20dp"
     android:clickable="true"
     android:focusable="true"
-    android:padding="4dp"
     app:cardElevation="10dp"
     android:id="@+id/topic_card">
 
@@ -21,21 +21,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/topic_name"
-            android:text="TOPIC NAME"
+            tools:text="TOPIC NAME"
             style="@style/topic_name"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/topic_creation_date"
-            android:text="TOPIC DATE"
+            tools:text="TOPIC DATE"
+            android:textStyle="bold"
             android:layout_marginTop="50sp"
             android:textSize="15sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/topic_reminder_count"
-            android:text="REMINDER COUNT"
+            tools:text="REMINDER COUNT"
+            android:textStyle="bold"
             android:textSize="15sp"/>
     </LinearLayout>
 

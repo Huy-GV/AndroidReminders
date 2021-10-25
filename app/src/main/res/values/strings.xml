@@ -25,4 +25,5 @@
     <string name="deadline_info">Due on %1s</string>
     <string name="priority_info">Priority: %1s</string>
     <string name="topic_name_max_error">Topic name exceeded 10 characters</string>
+    <string name="color_label">Color</string>
 </resources>
