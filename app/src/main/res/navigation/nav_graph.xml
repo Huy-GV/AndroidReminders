@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/readReminderFragment"
         android:name="com.reminders.reminders.ReadReminderFragment"
-        android:label="Reminders in {topic_name}"
+        android:label="Reminders"
         tools:layout="@layout/fragment_read_reminder" >
         <argument
             android:name="topic_id"

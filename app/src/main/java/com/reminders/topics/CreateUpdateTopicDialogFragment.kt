@@ -63,15 +63,18 @@ class CreateUpdateTopicDialogFragment(
         }
 
         colorBlock.setBackgroundResource(ColorSet.data[topicColor].colorId)
-        seekBar.progress = topicColor
-        seekBar.max = ColorSet.data.size - 1
-        seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                colorBlock.setBackgroundResource(ColorSet.data[progress].colorId)
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) { }
-            override fun onStopTrackingTouch(seekBar: SeekBar?) { }
-        })
+        seekBar.apply {
+            progress = topicColor
+            max = ColorSet.data.size - 1
+            setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    colorBlock.setBackgroundResource(ColorSet.data[progress].colorId)
+                }
+                override fun onStartTrackingTouch(seekBar: SeekBar?) { }
+                override fun onStopTrackingTouch(seekBar: SeekBar?) { }
+            })
+        }
+
 
         return view
     }
@@ -114,6 +117,6 @@ class CreateUpdateTopicDialogFragment(
     }
 
     companion object {
-        const val TAG = "create_update_topic"
+        const val TAG = "CreateUpdateTopicDialogFragment"
     }
 }
