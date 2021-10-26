@@ -10,14 +10,15 @@ import java.util.*
 class Converters {
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
-    fun toDate(dateString: String?): LocalDate? {
-        if (dateString.isNullOrEmpty()) return null
-        return LocalDate.parse(dateString)
+    fun toDate(date: Long?): LocalDate? {
+        if (date == null || date == 0L) return null
+        return LocalDate.ofEpochDay(date)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
-    fun toDateString(date: LocalDate?): String {
-        if (date == null) return ""
-        return date.toString()
+    fun toDateString(date: LocalDate?): Long? {
+        if (date == null) return 0
+        return date.toEpochDay()
     }
 }
