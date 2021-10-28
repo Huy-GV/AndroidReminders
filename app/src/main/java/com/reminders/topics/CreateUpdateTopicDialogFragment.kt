@@ -85,6 +85,7 @@ class CreateUpdateTopicDialogFragment(
             if (validTopicName()) {
                 viewModel.updateTopic(topicId, nameField.text.toString(), seekBar.progress)
                 viewModel.updateTopicColor(seekBar.progress)
+                Log.d("huy", "updated topic color is ${seekBar.progress}")
                 dismiss()
             }
         }

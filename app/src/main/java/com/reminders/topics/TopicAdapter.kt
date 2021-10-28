@@ -69,7 +69,7 @@ class TopicAdapter(
             card.setOnClickListener {
                 viewModel.updateTopicColor(topic.color)
                 val action = ReadTopicFragmentDirections
-                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name, topic.color)
+                    .actionReadTopicFragmentToReadReminderFragment(topic.id, topic.name)
                 view.findNavController().navigate(action)
             }
         }

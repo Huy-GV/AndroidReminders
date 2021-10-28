@@ -24,10 +24,8 @@ import java.util.*
 
 class CreateUpdateReminderFragment : Fragment() {
 
+    //TODO: REFRACTOR PRIORITIES STRING ARRAY
     private val args: CreateUpdateReminderFragmentArgs by navArgs()
-    private var topicId: Int = 0
-    private var reminder: Reminder? = null
-    private lateinit var action: Action
 
     private lateinit var priorities: Array<String>
     private lateinit var contentField: TextInputEditText
@@ -50,7 +48,6 @@ class CreateUpdateReminderFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        initializeArguments()
         val view = inflater.inflate(R.layout.fragment_create_update_reminder, container, false)
 
         view.apply {
@@ -76,18 +73,12 @@ class CreateUpdateReminderFragment : Fragment() {
             deadlineField.setText(it)
         }
 
-        when (action ){
+        when (args.actionType ){
             Action.CREATE -> setCreateAction()
-            Action.UPDATE -> setUpdateAction(reminder!!)
+            Action.UPDATE -> setUpdateAction(args.reminder!!)
         }
 
         return view
-    }
-
-    private fun initializeArguments() {
-        topicId = args.topicId
-        action = args.actionType
-        reminder = args.reminder
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -118,7 +109,7 @@ class CreateUpdateReminderFragment : Fragment() {
             viewModel.createReminder(
                 content = contentField.text.toString(),
                 priority = getPriorityLevel(priorityField.text.toString()),
-                topicId = topicId
+                topicId = args.topicId
             )
             viewModel.clearDeadlineString()
             findNavController().navigateUp()
