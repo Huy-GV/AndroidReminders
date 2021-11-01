@@ -28,6 +28,7 @@ class TopicAdapter(
         var name: TextView = view.findViewById(R.id.topic_name)
         var creationDate: TextView = view.findViewById(R.id.topic_creation_date)
         val reminderCount: TextView = view.findViewById(R.id.topic_reminder_count)
+        val reminderDueTodayCount: TextView = view.findViewById(R.id.topic_reminder_due_today_count)
         var card: MaterialCardView = view.findViewById(R.id.topic_card)
     }
 
@@ -54,17 +55,30 @@ class TopicAdapter(
             name.text = topic.name
             name.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
             creationDate.text = view.resources.getString(
-                    R.string.topic_creation_date,
-                    topic.creationDate.format(dateFormatter)
-                )
+                R.string.topic_creation_date,
+                topic.creationDate.format(dateFormatter)
+            )
             creationDate.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
+
+
+            reminderDueTodayCount.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
             reminderCount.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
-            viewModel.getReminderCount(topic.id).observe(viewLifecycleOwner) {
-                reminderCount.text = view.resources.getString(
-                    R.string.reminder_count,
-                    it.toString()
-                )
+
+            viewModel.apply {
+                getReminderCount(topic.id).observe(viewLifecycleOwner) {
+                    reminderCount.text = view.resources.getString(
+                        R.string.reminder_count,
+                        it.toString()
+                    )
+                }
+                getRemindersDueToday(topic.id).observe(viewLifecycleOwner) {
+                    reminderDueTodayCount.text = view.resources.getString(
+                        R.string.reminder_due_today_count,
+                        it.toString()
+                    )
+                }
             }
+
             card.setCardBackgroundColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].colorId))
             card.setOnClickListener {
                 viewModel.updateTopicColor(topic.color)

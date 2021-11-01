@@ -70,6 +70,11 @@ class AppViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    fun getRemindersDueToday(topicId: Int) : LiveData<Int> {
+        return topicDao.getReminderDueTodayCount(topicId, LocalDate.now().toEpochDay()).asLiveData()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun createReminder(content: String, priority: Int, topicId: Int) {
         viewModelScope.launch {
             reminderDao.create(Reminder(

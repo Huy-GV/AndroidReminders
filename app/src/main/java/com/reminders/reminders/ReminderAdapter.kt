@@ -17,7 +17,8 @@ import com.reminders.R
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
 import java.time.LocalDate
-
+import java.util.Timer
+import kotlin.concurrent.schedule
 
 class ReminderAdapter(
     private val viewModel: AppViewModel,
@@ -56,7 +57,9 @@ class ReminderAdapter(
             checkButton.isChecked = false
             checkButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    viewModel.deleteReminder(reminder)
+                    Timer("FinishReminder", false).schedule(1000) {
+                        viewModel.deleteReminder(reminder)
+                    }
                 }
             }
             card.setOnClickListener {

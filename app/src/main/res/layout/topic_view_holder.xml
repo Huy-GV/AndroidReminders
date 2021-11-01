@@ -39,6 +39,13 @@
             tools:text="REMINDER COUNT"
             android:textStyle="bold"
             android:textSize="15sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topic_reminder_due_today_count"
+            tools:text="REMINDER DUE TODAY"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 

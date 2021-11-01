@@ -23,4 +23,7 @@ interface TopicDao {
 
     @Query("SELECT COUNT(*) FROM reminder WHERE reminder.topicId = :id")
     fun getReminderCount(id: Int): Flow<Int>
+
+    @Query("SELECT COUNT(*) FROM reminder WHERE reminder.topicId = :id AND deadline = :date")
+    fun getReminderDueTodayCount(id: Int, date: Long): Flow<Int>
 }
