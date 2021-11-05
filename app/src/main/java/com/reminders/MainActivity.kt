@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
+        //hides the back button on the app bar to utilize Android's native back button
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.readTopicFragment, R.id.readReminderFragment,
             R.id.readReminderFragment, R.id.createUpdateReminderFragment))

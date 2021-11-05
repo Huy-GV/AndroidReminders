@@ -57,6 +57,7 @@ class ReminderAdapter(
             checkButton.isChecked = false
             checkButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    //display a checked radio button to confirm the user's action
                     Timer("FinishReminder", false).schedule(1000) {
                         viewModel.deleteReminder(reminder)
                     }

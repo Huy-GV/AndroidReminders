@@ -24,7 +24,6 @@ import java.util.*
 
 class CreateUpdateReminderFragment : Fragment() {
 
-    //TODO: REFRACTOR PRIORITIES STRING ARRAY
     private val args: CreateUpdateReminderFragmentArgs by navArgs()
 
     private lateinit var priorities: Array<String>
@@ -81,6 +80,7 @@ class CreateUpdateReminderFragment : Fragment() {
         return view
     }
 
+    //the form is prefilled when the user updates a reminder
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setUpdateAction(reminder: Reminder) {
 

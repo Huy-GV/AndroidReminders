@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.Flow
 interface TopicDao {
     @Insert
     suspend fun create(topic: Topic)
-//    @Update
-//    suspend fun update(topic: Topic)
+
     @Query("UPDATE topic SET name = :name, color = :color WHERE id = :topicId")
     suspend fun update(topicId: Int, name: String, color: Int)
-//    @Delete
-//    suspend fun delete(topic: Topic)
+
     @Query("DELETE FROM topic WHERE id = :topicId")
     suspend fun delete(topicId: Int)
+
     @Query("SELECT * from topic ORDER BY name ASC")
     fun getAll(): Flow<List<Topic>>
+
     @Query("SELECT * from topic WHERE id = :id")
     fun getTopic(id: Int): Flow<Topic>
 
