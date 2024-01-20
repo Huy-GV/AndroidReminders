@@ -44,7 +44,6 @@ class CreateUpdateReminderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_update_reminder, container, false)
 
         view.apply {
@@ -81,7 +80,6 @@ class CreateUpdateReminderFragment : Fragment() {
     // the form is prefilled with existing data when the user updates a reminder
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setUpdateAction(reminder: Reminder) {
-
         positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
         viewModel.updateDeadlineString(reminder.deadline)
@@ -93,6 +91,7 @@ class CreateUpdateReminderFragment : Fragment() {
                 deadline = viewModel.parseDeadline()
                 priority = getPriorityLevel(priorityField.text.toString())
             }
+
             viewModel.clearDeadlineString()
             viewModel.updateReminder(reminder)
             findNavController().navigateUp()
@@ -109,6 +108,7 @@ class CreateUpdateReminderFragment : Fragment() {
                 priority = getPriorityLevel(priorityField.text.toString()),
                 topicId = args.topicId
             )
+
             viewModel.clearDeadlineString()
             findNavController().navigateUp()
         }

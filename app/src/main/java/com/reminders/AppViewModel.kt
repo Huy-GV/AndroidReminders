@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter
 class AppViewModel(
     private val topicDao: TopicDao,
     private val reminderDao: ReminderDao
-
 ) : ViewModel() {
 
     private var _deadlineString: MutableLiveData<String> = MutableLiveData("")
@@ -24,24 +23,31 @@ class AppViewModel(
         _topicColor.value = newId
     }
 
-    fun clearTopicColor() { _topicColor.value = null }
+    fun clearTopicColor() {
+        _topicColor.value = null
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy")
 
-    fun clearDeadlineString() { _deadlineString.value = null }
+    fun clearDeadlineString() {
+        _deadlineString.value = null
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun parseDeadline() : LocalDate? {
-        if (_deadlineString.value.isNullOrEmpty()) {
-            return null
+        return if (_deadlineString.value.isNullOrEmpty()) {
+            null
+        } else {
+            LocalDate.parse(_deadlineString.value, dateFormatter)
         }
-        return LocalDate.parse(_deadlineString.value, dateFormatter)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun updateDeadlineString(date: LocalDate?) {
-        if (date == null) clearDeadlineString()
+        if (date == null) {
+            clearDeadlineString()
+        }
         else  {
             _deadlineString.value = date.format(dateFormatter)
         }

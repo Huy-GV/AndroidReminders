@@ -29,10 +29,10 @@ class ReadTopicFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_topic, container, false)
         val recycler = view.findViewById<RecyclerView>(R.id.topic_recycler)
         val topicAdapter = TopicAdapter(viewModel.dateFormatter, viewModel, viewLifecycleOwner)

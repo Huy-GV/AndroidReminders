@@ -24,7 +24,7 @@ class CreateUpdateTopicDialogFragment(
 ) : DialogFragment() {
 
     private lateinit var nameField: TextInputEditText
-    private lateinit var positiveButton: Button
+    private lateinit var addOrUpdateButton: Button
     private lateinit var colorBlock: View
     private lateinit var seekBar: SeekBar
     private var maxTopicLength: Int = 0
@@ -35,12 +35,11 @@ class CreateUpdateTopicDialogFragment(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_create_update_topic, container, false)
 
         colorBlock = view.findViewById(R.id.color_block)
         seekBar = view.findViewById(R.id.color_seek_bar)
-        positiveButton = view.findViewById(R.id.positive_topic_button)
+        addOrUpdateButton = view.findViewById(R.id.positive_topic_button)
         nameField = view.findViewById(R.id.topic_name_field)
         nameField.setText(topicName)
 
@@ -70,13 +69,12 @@ class CreateUpdateTopicDialogFragment(
             })
         }
 
-
         return view
     }
 
     private fun setUpdateTopic() {
-        positiveButton.text = resources.getString(R.string.save_changes)
-        positiveButton.setOnClickListener {
+        addOrUpdateButton.text = resources.getString(R.string.save_changes)
+        addOrUpdateButton.setOnClickListener {
             if (validTopicName()) {
                 viewModel.updateTopic(topicId, nameField.text.toString(), seekBar.progress)
                 viewModel.updateTopicColor(seekBar.progress)
@@ -87,14 +85,15 @@ class CreateUpdateTopicDialogFragment(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setCreateTopic() {
-        positiveButton.text = resources.getString(R.string.add_new)
-        positiveButton.setOnClickListener {
+        addOrUpdateButton.text = resources.getString(R.string.add_new)
+        addOrUpdateButton.setOnClickListener {
             if (validTopicName()) {
                 viewModel.createTopic(
                     nameField.text.toString(),
                     LocalDate.now(),
                     seekBar.progress
                 )
+
                 dismiss()
             }
         }
@@ -108,6 +107,7 @@ class CreateUpdateTopicDialogFragment(
             nameField.error = resources.getString(R.string.topic_name_max_error)
             return false
         }
+
         return true
     }
 

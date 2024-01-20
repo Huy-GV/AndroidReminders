@@ -9,20 +9,16 @@ class Converters {
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun toDate(date: Long?): LocalDate? {
-        if (date == null || date == 0L) {
-            return null
+        return if (date == null || date == 0L) {
+            null
+        } else {
+            LocalDate.ofEpochDay(date)
         }
-
-        return LocalDate.ofEpochDay(date)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun toDateString(date: LocalDate?): Long {
-        if (date == null) {
-            return 0
-        }
-
-        return date.toEpochDay()
+        return date?.toEpochDay() ?: 0
     }
 }

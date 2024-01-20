@@ -26,10 +26,10 @@ class ReminderAdapter(
 
     inner class TopicViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val checkButton: RadioButton = view.findViewById(R.id.reminder_check)
-        val content: TextView = view.findViewById(R.id.reminder_content)
-        val card: MaterialCardView = view.findViewById(R.id.reminder_card)
-        val deadline: TextView = view.findViewById(R.id.reminder_deadline)
-        val priority: TextView = view.findViewById(R.id.reminder_priority)
+        val reminderContentView: TextView = view.findViewById(R.id.reminder_content)
+        val reminderCardView: MaterialCardView = view.findViewById(R.id.reminder_card)
+        val reminderDeadlineView: TextView = view.findViewById(R.id.reminder_deadline)
+        val reminderPriorityLevelView: TextView = view.findViewById(R.id.reminder_priority)
     }
 
     private val reminders = mutableListOf<Reminder>()
@@ -52,17 +52,18 @@ class ReminderAdapter(
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
         val reminder = reminders[position]
         holder.apply {
-            content.text = reminder.content
+            reminderContentView.text = reminder.content
             checkButton.isChecked = false
             checkButton.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    //display a checked radio button to confirm the user's action
-                    Timer("FinishReminder", false).schedule(1000) {
+                    // display a checked radio button for 1.5s to confirm the user's action
+                    Timer("FinishReminder", false).schedule(R.integer.reminder_removal_delay_time.toLong()) {
                         viewModel.deleteReminder(reminder)
                     }
                 }
             }
-            card.setOnClickListener {
+
+            reminderCardView.setOnClickListener {
                 view.findNavController()
                     .navigate(ReadReminderFragmentDirections
                     .actionReadReminderFragmentToCreateUpdateReminderFragment(
@@ -74,26 +75,23 @@ class ReminderAdapter(
             }
 
             if (reminder.deadline == null ) {
-                deadline.text =  ""
+                reminderDeadlineView.text =  ""
             } else {
-                deadline.text = view.resources.getString(
+                reminderDeadlineView.text = view.resources.getString(
                     R.string.deadline_info,
                     reminder.deadline!!.format(viewModel.dateFormatter)
                 )
                 if (LocalDate.now().isAfter(reminder.deadline)) {
-                    deadline.setTextColor(ContextCompat.getColor(view.context, R.color.red))
+                    reminderDeadlineView.setTextColor(ContextCompat.getColor(view.context, R.color.red))
                 }
             }
 
-//            viewModel.setDeadlineString(reminder.deadline)
-//            deadline.text = viewModel.deadlineString.value
-
             val priorities = view.resources.getStringArray(R.array.priorities)
-            priority.text = view.resources.getString(
+            reminderPriorityLevelView.text = view.resources.getString(
                 R.string.priority_info,
                 priorities[reminder.priority]
             )
-            setPriorityColor(view, priority, reminder.priority, priorities.lastIndex)
+            setPriorityColor(view, reminderPriorityLevelView, reminder.priority, priorities.lastIndex)
         }
     }
 

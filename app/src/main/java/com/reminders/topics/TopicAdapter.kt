@@ -21,7 +21,7 @@ class TopicAdapter(
     private val dateFormatter: DateTimeFormatter,
     private val viewModel: AppViewModel,
     private val viewLifecycleOwner: LifecycleOwner
-    ) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
+) : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     inner class TopicViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         var name: TextView = view.findViewById(R.id.topic_name)
@@ -53,12 +53,12 @@ class TopicAdapter(
         holder.apply {
             name.text = topic.name
             name.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
+
             creationDate.text = view.resources.getString(
                 R.string.topic_creation_date,
                 topic.creationDate.format(dateFormatter)
             )
             creationDate.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
-
 
             reminderDueTodayCount.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))
             reminderCount.setTextColor(ContextCompat.getColor(view.context, ColorSet.data[topic.color].textColorId))

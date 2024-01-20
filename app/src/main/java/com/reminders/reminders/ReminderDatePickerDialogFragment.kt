@@ -26,21 +26,26 @@ class ReminderDatePickerDialogFragment(private val viewModel: AppViewModel) : Di
         var year = 0
         val view =  inflater.inflate(R.layout.fragment_date_picker, container, false)
         val datePicker = view.findViewById<DatePicker>(R.id.calendarView)
+
         datePicker.setOnDateChangedListener { _, pickedYear, monthOfYear, dayOfMonth ->
             date = dayOfMonth
-            month = monthOfYear
+
+            // add 1 because monthOfYear is 0-indexed
+            month = monthOfYear + 1
             year = pickedYear
         }
 
         view.findViewById<Button>(R.id.confirm_date_button).setOnClickListener {
             if (date != 0 && month != 0 && year != 0) {
-                viewModel.updateDeadlineString(LocalDate.of(year, month + 1, date))
+                viewModel.updateDeadlineString(LocalDate.of(year, month, date))
             }
 
             dismiss()
         }
 
-        view.findViewById<Button>(R.id.cancel_button).setOnClickListener { dismiss() }
+        view.findViewById<Button>(R.id.cancel_button).setOnClickListener {
+            dismiss()
+        }
 
         return view
     }

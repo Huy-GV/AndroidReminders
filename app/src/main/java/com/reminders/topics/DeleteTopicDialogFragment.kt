@@ -17,7 +17,7 @@ class DeleteTopicDialogFragment(
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(deleteWarning)
-            .setPositiveButton(resources.getString(R.string.delete)) { _,_ ->
+            .setPositiveButton(resources.getString(R.string.delete)) { _, _ ->
                 viewModel.deleteTopic(topicId)
                 findNavController().navigateUp()
                 dismiss()

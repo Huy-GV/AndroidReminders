@@ -40,7 +40,7 @@ class ReadReminderFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.reminder_menu, menu)
+        inflater.inflate(R.menu.update_or_delete_topic_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -73,13 +73,14 @@ class ReadReminderFragment : Fragment() {
         return true
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
         view.setBackgroundResource(ColorSet.data[viewModel.topicColor.value!!].colorId)
-        val recycler = view.findViewById<RecyclerView>(R.id.reminder_recycler)
+        val reminderRecyclerView = view.findViewById<RecyclerView>(R.id.reminder_recycler)
         val reminderAdapter = ReminderAdapter(
             viewModel,
             resources.getString(R.string.update_reminder_label)
@@ -95,7 +96,7 @@ class ReadReminderFragment : Fragment() {
             }
         }
 
-        recycler.apply {
+        reminderRecyclerView.apply {
             adapter = reminderAdapter
             layoutManager = LinearLayoutManager(this@ReadReminderFragment.context)
         }
