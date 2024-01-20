@@ -19,9 +19,8 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import com.reminders.data.enum.Action
 import com.reminders.data.model.Reminder
-import java.util.*
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 class CreateUpdateReminderFragment : Fragment() {
 
     private val args: CreateUpdateReminderFragmentArgs by navArgs()
@@ -119,8 +118,11 @@ class CreateUpdateReminderFragment : Fragment() {
     private fun getPriorityLevel(priority: String) : Int {
         val priorities = resources.getStringArray(R.array.priorities)
         priorities.forEachIndexed { index, priorityString ->
-            if (priorityString == priority) return@getPriorityLevel index
+            if (priorityString == priority) {
+                return@getPriorityLevel index
+            }
         }
+
         return 1
     }
 }
