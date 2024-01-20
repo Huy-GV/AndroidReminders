@@ -7,7 +7,6 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDate
-import java.util.*
 
 @Parcelize
 @Entity(foreignKeys = [ForeignKey(

@@ -1,6 +1,5 @@
 package com.reminders.reminders
 
-
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -108,5 +107,4 @@ class ReminderAdapter(
     override fun getItemCount(): Int {
         return reminders.size
     }
-
 }

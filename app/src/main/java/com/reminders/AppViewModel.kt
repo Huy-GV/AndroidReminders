@@ -1,4 +1,4 @@
-  package com.reminders
+package com.reminders
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -16,11 +16,9 @@ class AppViewModel(
 ) : ViewModel() {
 
     private var _deadlineString: MutableLiveData<String> = MutableLiveData("")
-    val deadlineString: LiveData<String> get() = _deadlineString
-
     private var _topicColor: MutableLiveData<Int> = MutableLiveData(0)
     val topicColor: LiveData<Int> get() = _topicColor
-
+    val deadlineString: LiveData<String> get() = _deadlineString
 
     fun updateTopicColor(newId: Int) {
         _topicColor.value = newId
@@ -55,7 +53,6 @@ class AppViewModel(
             topicDao.create(Topic(name = name, creationDate = creationDate, color = color))
         }
     }
-
 
     fun getTopics() : LiveData<List<Topic>> {
         return topicDao.getAll().asLiveData()
@@ -114,11 +111,9 @@ class AppViewModel(
         private val reminderDao: ReminderDao,
         private val topicDao: TopicDao
     ) : ViewModelProvider.Factory {
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return AppViewModel(topicDao, reminderDao) as T
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.reminders.data.database
 
-import android.app.Application
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,9 +7,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.reminders.data.dao.*
-import com.reminders.data.model.*
-import java.time.LocalDate
+import com.reminders.data.dao.ReminderDao
+import com.reminders.data.dao.TopicDao
+import com.reminders.data.model.Converters
+import com.reminders.data.model.Reminder
+import com.reminders.data.model.Topic
 
 @Database(entities = [Reminder::class, Topic::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)

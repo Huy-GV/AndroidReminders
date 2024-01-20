@@ -1,8 +1,11 @@
 package com.reminders.data.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import com.reminders.data.model.Reminder
-import com.reminders.data.model.Topic
 import kotlinx.coroutines.flow.Flow
 
 @Dao

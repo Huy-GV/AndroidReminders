@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.reminders.AppViewModel
 import com.reminders.R
 
-
 class DeleteTopicDialogFragment(
     private val topicId: Int,
     private val viewModel: AppViewModel,

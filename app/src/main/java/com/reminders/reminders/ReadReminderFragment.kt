@@ -1,7 +1,7 @@
 package com.reminders.reminders
 
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,14 +13,15 @@ import com.reminders.R
 import com.reminders.application.MyApplication
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.reminders.data.enum.Action
 import com.reminders.data.enum.ColorSet
 import com.reminders.topics.CreateUpdateTopicDialogFragment
 import com.reminders.topics.DeleteTopicDialogFragment
-import com.reminders.topics.ReadTopicFragmentDirections
 
+@RequiresApi(Build.VERSION_CODES.O)
 class ReadReminderFragment : Fragment() {
 
     private val args: ReadReminderFragmentArgs by navArgs()
@@ -74,8 +75,6 @@ class ReadReminderFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_read_reminder, container, false)
 
@@ -90,11 +89,11 @@ class ReadReminderFragment : Fragment() {
             getReminders(args.topicId).observe(this@ReadReminderFragment.viewLifecycleOwner) {
                 reminders -> reminderAdapter.updateData(reminders)
             }
+
             topicColor.observe(this@ReadReminderFragment.viewLifecycleOwner) {
                 view.setBackgroundResource(ColorSet.data[viewModel.topicColor.value!!].colorId)
             }
         }
-
 
         recycler.apply {
             adapter = reminderAdapter
@@ -111,6 +110,7 @@ class ReadReminderFragment : Fragment() {
                 )
             findNavController().navigate(action)
         }
+
         return view
     }
 }

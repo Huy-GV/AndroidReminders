@@ -17,7 +17,6 @@ import com.reminders.data.enum.ColorSet
 import com.reminders.data.model.Topic
 import java.time.format.DateTimeFormatter
 
-
 class TopicAdapter(
     private val dateFormatter: DateTimeFormatter,
     private val viewModel: AppViewModel,
@@ -32,7 +31,7 @@ class TopicAdapter(
         var card: MaterialCardView = view.findViewById(R.id.topic_card)
     }
 
-    val topics = mutableListOf<Topic>()
+    private val topics = mutableListOf<Topic>()
 
     fun updateData(newData: List<Topic>) {
         topics.clear()

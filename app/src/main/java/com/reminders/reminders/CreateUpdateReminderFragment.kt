@@ -25,7 +25,7 @@ class CreateUpdateReminderFragment : Fragment() {
 
     private val args: CreateUpdateReminderFragmentArgs by navArgs()
 
-    private lateinit var priorities: Array<String>
+    private lateinit var priorityLevels: Array<String>
     private lateinit var contentField: TextInputEditText
     private lateinit var deadlineField: TextInputEditText
     private lateinit var priorityField: AutoCompleteTextView
@@ -45,7 +45,6 @@ class CreateUpdateReminderFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-
         val view = inflater.inflate(R.layout.fragment_create_update_reminder, container, false)
 
         view.apply {
@@ -58,8 +57,8 @@ class CreateUpdateReminderFragment : Fragment() {
             }
         }
 
-        priorities = resources.getStringArray(R.array.priorities)
-        priorityField.setAdapter(ArrayAdapter(requireContext(), R.layout.dropdown_item, priorities))
+        priorityLevels = resources.getStringArray(R.array.priorities)
+        priorityField.setAdapter(ArrayAdapter(requireContext(), R.layout.dropdown_item, priorityLevels))
         priorityField.hint = resources.getString(R.string.priority_hint)
 
         deadlineField.setOnClickListener {
@@ -79,14 +78,14 @@ class CreateUpdateReminderFragment : Fragment() {
         return view
     }
 
-    //the form is prefilled when the user updates a reminder
+    // the form is prefilled with existing data when the user updates a reminder
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setUpdateAction(reminder: Reminder) {
 
         positiveButton.text = resources.getString(R.string.save_changes)
         contentField.setText(reminder.content)
         viewModel.updateDeadlineString(reminder.deadline)
-        priorityField.hint = priorities[reminder.priority]
+        priorityField.hint = priorityLevels[reminder.priority]
 
         positiveButton.setOnClickListener {
             reminder.apply {

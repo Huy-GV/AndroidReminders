@@ -1,25 +1,19 @@
 package com.reminders.topics
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
 import androidx.annotation.RequiresApi
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.navArgs
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 import com.reminders.AppViewModel
 import com.reminders.R
 import com.reminders.data.enum.Action
 import com.reminders.data.enum.ColorSet
-import com.reminders.reminders.CreateUpdateReminderFragmentArgs
 import java.time.LocalDate
 
 class CreateUpdateTopicDialogFragment(
@@ -70,6 +64,7 @@ class CreateUpdateTopicDialogFragment(
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                     colorBlock.setBackgroundResource(ColorSet.data[progress].colorId)
                 }
+
                 override fun onStartTrackingTouch(seekBar: SeekBar?) { }
                 override fun onStopTrackingTouch(seekBar: SeekBar?) { }
             })
