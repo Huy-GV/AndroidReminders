@@ -17,3 +17,11 @@ Reminders application written in Kotlin for Android mobile devices.
 - Set up an emulator device in Device Manager and select `R` as the system image (API level 30)
 
 ## Images
+### Home Page
+![HomePageAndroid](https://github.com/Huy-GV/AndroidReminders/assets/78300296/67fbfde3-d317-499f-9c47-9dad6908d1bf)
+
+### Reminders Page
+![RemindersPageAndroid](https://github.com/Huy-GV/AndroidReminders/assets/78300296/0bd2b9b0-49d3-4b91-bc80-11763c94abe9)
+
+### Creating a Topic
+![CreateTopicAndroid](https://github.com/Huy-GV/AndroidReminders/assets/78300296/603f425f-070a-4ac8-bdbc-7b0ca937b700)
